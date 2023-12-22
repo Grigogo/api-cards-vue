@@ -1,0 +1,157 @@
+{
+  "id": "30329726",
+  "name": {
+    "id": "433",
+    "name": "Масло моторное"
+  },
+  "originalName": "Масло моторное синтетическое RAVENOL 5W-30, 4л",
+  "code": "4014835723498",
+  "barcodes": "",
+  "brand": "Ravenol",
+  "description": "",
+  "parameters": [
+    {
+      "id": "50",
+      "name": "Все параметры",
+      "params": [
+        {
+          "id": "183",
+          "title": "Вязкость SAE",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14453351",
+              "value": "5W - 30"
+            }
+          ]
+        },
+        {
+          "id": "182",
+          "title": "Состав масла",
+          "type": "enum",
+          "values": [
+            {
+              "id": "1720417",
+              "value": "Синтетическое"
+            }
+          ]
+        },
+        {
+          "id": "745",
+          "title": "Тип упаковки",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14520697",
+              "value": "канистра пластиковая"
+            }
+          ]
+        },
+        {
+          "id": "793",
+          "title": "Вес брутто [кг]",
+          "type": "number",
+          "values": [
+            {
+              "id": "17836576",
+              "value": "3.71"
+            }
+          ]
+        },
+        {
+          "id": "184",
+          "title": "Объем [л]",
+          "type": "number",
+          "values": [
+            {
+              "id": "17836574",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "id": "831",
+          "title": "Страна регистрации бренда",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14520994",
+              "value": "Германия"
+            }
+          ]
+        },
+        {
+          "id": "185",
+          "title": "Классификация API",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14453416",
+              "value": "SM"
+            },
+            {
+              "id": "17792105",
+              "value": "EC"
+            }
+          ]
+        },
+        {
+          "id": "186",
+          "title": "Классификация ACEA",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14453425",
+              "value": "A5"
+            },
+            {
+              "id": "14453431",
+              "value": "B5"
+            },
+            {
+              "id": "14453439",
+              "value": "C1"
+            }
+          ]
+        },
+        {
+          "id": "180",
+          "title": "Классификация ILSAC",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14453326",
+              "value": "GF - 3"
+            },
+            {
+              "id": "14453327",
+              "value": "GF - 4"
+            }
+          ]
+        },
+        {
+          "id": "856",
+          "title": "Классификация JASO",
+          "type": "enum",
+          "values": [
+            {
+              "id": "14565935",
+              "value": "DL - 1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "images": [
+    "https://img-wm.parts-index.com/images/fd/55/fd5533ca90e1bda57d431eabc95803a8.jpg"
+  ],
+  "apply": null,
+  "priceRange": {
+    "id": "",
+    "min": "",
+    "max": "",
+    "history": null
+  },
+  "links": []
+}

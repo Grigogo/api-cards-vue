@@ -1,0 +1,56 @@
+.fade--slow-enter-active,
+.fade--slow-leave-active {
+  transition: opacity 0.7s cubic-bezier(0.5, 0.11, 0.11, 1);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s cubic-bezier(0.5, 0.11, 0.11, 1);
+}
+
+.fade--fast-enter-active,
+.fade--fast-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.5, 0.11, 0.11, 1);
+}
+
+.fade--faster-enter-active,
+.fade--faster-leave-active {
+  transition: opacity 0.2s cubic-bezier(0.5, 0.11, 0.11, 1);
+}
+
+.fade-enter,
+.fade-leave-to,
+.fade--slow-enter,
+.fade--slow-leave-to,
+.fade--fast-enter,
+.fade--fast-leave-to,
+.fade--faster-enter,
+.fade--faster-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave,
+.fade--slow-enter-to,
+.fade--slow-leave,
+.fade--fast-enter-to,
+.fade--fast-leave,
+.fade--faster-enter-to,
+.fade--faster-leave {
+  opacity: 1;
+}
+
+/////////////////animate.css////////////////
+.animate--delay-500ms {
+  animation-delay: 0.5s;
+}
+.animate--delay-250ms {
+  animation-delay: 0.25s;
+}
+.animate--delay-100ms {
+  animation-delay: 0.1s;
+}
+.animate__faster {
+  animation-duration: 0.25s !important;
+  animation-timing-function: ease-in-out;
+}

@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('/local/templates/parts-index/fonts/Inter-LightBETA.eot');
+  src: local('Inter Light BETA'), local('Inter-LightBETA'),
+    url('/local/templates/parts-index/fonts/Inter-LightBETA.eot?#iefix') format('embedded-opentype'),
+    url('/local/templates/parts-index/fonts/Inter-LightBETA.woff2') format('woff2'),
+    url('/local/templates/parts-index/fonts/Inter-LightBETA.woff') format('woff'),
+    url('/local/templates/parts-index/fonts/Inter-LightBETA.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/local/templates/parts-index/fonts/Inter-Regular.eot');
+  src: local('Inter Regular'), local('Inter-Regular'),
+    url('/local/templates/parts-index/fonts/Inter-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/local/templates/parts-index/fonts/Inter-Regular.woff2') format('woff2'),
+    url('/local/templates/parts-index/fonts/Inter-Regular.woff') format('woff'),
+    url('/local/templates/parts-index/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/local/templates/parts-index/fonts/Inter-SemiBold.eot');
+  src: local('Inter Semi Bold'), local('Inter-SemiBold'),
+    url('/local/templates/parts-index/fonts/Inter-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('/local/templates/parts-index/fonts/Inter-SemiBold.woff2') format('woff2'),
+    url('/local/templates/parts-index/fonts/Inter-SemiBold.woff') format('woff'),
+    url('/local/templates/parts-index/fontsInter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}

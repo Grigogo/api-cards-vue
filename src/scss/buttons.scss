@@ -1,0 +1,64 @@
+.d-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0 40px;
+  transition: 0.15s;
+  height: 56px;
+  background-color: transparent;
+  border: 2px solid currentColor;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1;
+  &:hover {
+    opacity: 0.95;
+    & .d-button__append {
+      transform: translateX(6px);
+    }
+  }
+  &:focus {
+    opacity: 0.85;
+  }
+
+  &.filled {
+    border: 2px solid currentColor;
+    span {
+      color: #fff;
+    }
+    svg {
+      color: #fff;
+    }
+  }
+}
+
+.d-button__append {
+  margin-left: 12px;
+  width: 12px;
+  height: 12px;
+  min-width: 10px;
+  min-width: 10px;
+  max-height: 18px;
+  max-height: 18px;
+  transition: 0.15s;
+}
+.d-button__prepend {
+  margin-right: 12px;
+  width: 12px;
+  height: 12px;
+  min-width: 10px;
+  min-width: 10px;
+  max-height: 18px;
+  max-height: 18px;
+  transition: 0.15s;
+}
+@media (max-width: $mobile) {
+  .d-button {
+    font-size: 14px;
+    height: 48px;
+  }
+}

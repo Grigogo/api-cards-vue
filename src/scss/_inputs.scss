@@ -1,0 +1,54 @@
+input[type='text'] {
+  border-radius: 4px;
+  background-color: $lightgrey;
+  border: 1px solid #e7e7e9;
+  transition: 0.15s;
+  height: 48px;
+  padding: 0 16px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  outline: none;
+  cursor: pointer;
+  &:focus,
+  &:hover {
+    border: 1px solid $darkgrey;
+    outline: none;
+  }
+  &::placeholder {
+    color: $darkgrey;
+  }
+}
+
+.label_active {
+  .pseudo {
+    background-color: $green;
+    border-color: $green;
+  }
+  .pseudo-svg {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.input:focus ~ .pseudo {
+  border-color: $green;
+}
+.pseudo {
+  border: 1px solid #ccccd2;
+  border-radius: 2px;
+  min-width: 16px;
+  max-width: 16px;
+  width: 100%;
+  min-height: 16px;
+  max-height: 16px;
+  height: 100%;
+  margin-right: 12px;
+  transition: 0.15s;
+  color: #fff;
+}
+
+.pseudo-svg {
+  opacity: 0;
+  visibility: hidden;
+}

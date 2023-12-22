@@ -1,0 +1,40 @@
+$body-font-family: 'Inter';
+$black: #13131f;
+$dark: #2b2a44;
+$darkgrey: #797989;
+$grey: #ccccd2;
+$lightgrey: #f9f9f9;
+$red: #eb5757;
+$pink: #dd1772;
+$lightpink: #fce8f1;
+$green: #1baf6d;
+$lightgreen: #d9efea;
+$orange: #ff9900;
+$lightorange: #fff0d9;
+$darkblue: #1250a2;
+$blue: #1972e7;
+$lightblue: #a1c5f5;
+$whiteblue: #f2f7ff;
+
+$xl: 1900px;
+$large: 1600px;
+$medium: 1500px;
+$small: 1400px;
+$xs: 1200px;
+$tablet: 1023px;
+$mobile: 767px;
+
+:root {
+  #{'--section-margin'}: 96px;
+}
+
+@media (max-width: $small) {
+  :root {
+    #{'--section-margin'}: 80px;
+  }
+}
+@media (max-width: $mobile) {
+  :root {
+    #{'--section-margin'}: 56px;
+  }
+}
