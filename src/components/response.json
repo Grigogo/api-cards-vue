@@ -1,157 +1,185 @@
-{
-  "id": "30329726",
-  "name": {
-    "id": "433",
-    "name": "Масло моторное"
+[
+  {
+    "ID": "645",
+    "~ID": "645",
+    "TIMESTAMP_X": "2023-12-11 14:38:24",
+    "~TIMESTAMP_X": "2023-12-11 14:38:24",
+    "MODIFIED_BY": "63517",
+    "~MODIFIED_BY": "63517",
+    "DATE_CREATE": "2023-12-11 14:38:24",
+    "~DATE_CREATE": "2023-12-11 14:38:24",
+    "CREATED_BY": "63517",
+    "~CREATED_BY": "63517",
+    "IBLOCK_ID": "150",
+    "~IBLOCK_ID": "150",
+    "IBLOCK_SECTION_ID": null,
+    "~IBLOCK_SECTION_ID": null,
+    "ACTIVE": "Y",
+    "~ACTIVE": "Y",
+    "GLOBAL_ACTIVE": "Y",
+    "~GLOBAL_ACTIVE": "Y",
+    "SORT": "500",
+    "~SORT": "500",
+    "NAME": "Кейсы API",
+    "~NAME": "Кейсы API",
+    "PICTURE": null,
+    "~PICTURE": null,
+    "LEFT_MARGIN": "25",
+    "~LEFT_MARGIN": "25",
+    "RIGHT_MARGIN": "42",
+    "~RIGHT_MARGIN": "42",
+    "DEPTH_LEVEL": "1",
+    "~DEPTH_LEVEL": "1",
+    "DESCRIPTION": "",
+    "~DESCRIPTION": "",
+    "DESCRIPTION_TYPE": "text",
+    "~DESCRIPTION_TYPE": "text",
+    "SEARCHABLE_CONTENT": "КЕЙСЫ API\r\n",
+    "~SEARCHABLE_CONTENT": "КЕЙСЫ API\r\n",
+    "CODE": "",
+    "~CODE": "",
+    "XML_ID": "",
+    "~XML_ID": "",
+    "TMP_ID": null,
+    "~TMP_ID": null,
+    "DETAIL_PICTURE": null,
+    "~DETAIL_PICTURE": null,
+    "SOCNET_GROUP_ID": null,
+    "~SOCNET_GROUP_ID": null,
+    "LIST_PAGE_URL": "/parts_index/index.php?ID=150",
+    "~LIST_PAGE_URL": "/parts_index/index.php?ID=150",
+    "SECTION_PAGE_URL": "/parts_index/list.php?SECTION_ID=645",
+    "~SECTION_PAGE_URL": "/parts_index/list.php?SECTION_ID=645",
+    "IBLOCK_TYPE_ID": "parts_index",
+    "~IBLOCK_TYPE_ID": "parts_index",
+    "IBLOCK_CODE": "information-card",
+    "~IBLOCK_CODE": "information-card",
+    "IBLOCK_EXTERNAL_ID": "130",
+    "~IBLOCK_EXTERNAL_ID": "130",
+    "EXTERNAL_ID": "",
+    "~EXTERNAL_ID": "",
+    "IPROPERTY_VALUES": []
   },
-  "originalName": "Масло моторное синтетическое RAVENOL 5W-30, 4л",
-  "code": "4014835723498",
-  "barcodes": "",
-  "brand": "Ravenol",
-  "description": "",
-  "parameters": [
-    {
-      "id": "50",
-      "name": "Все параметры",
-      "params": [
-        {
-          "id": "183",
-          "title": "Вязкость SAE",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14453351",
-              "value": "5W - 30"
-            }
-          ]
-        },
-        {
-          "id": "182",
-          "title": "Состав масла",
-          "type": "enum",
-          "values": [
-            {
-              "id": "1720417",
-              "value": "Синтетическое"
-            }
-          ]
-        },
-        {
-          "id": "745",
-          "title": "Тип упаковки",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14520697",
-              "value": "канистра пластиковая"
-            }
-          ]
-        },
-        {
-          "id": "793",
-          "title": "Вес брутто [кг]",
-          "type": "number",
-          "values": [
-            {
-              "id": "17836576",
-              "value": "3.71"
-            }
-          ]
-        },
-        {
-          "id": "184",
-          "title": "Объем [л]",
-          "type": "number",
-          "values": [
-            {
-              "id": "17836574",
-              "value": "4"
-            }
-          ]
-        },
-        {
-          "id": "831",
-          "title": "Страна регистрации бренда",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14520994",
-              "value": "Германия"
-            }
-          ]
-        },
-        {
-          "id": "185",
-          "title": "Классификация API",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14453416",
-              "value": "SM"
-            },
-            {
-              "id": "17792105",
-              "value": "EC"
-            }
-          ]
-        },
-        {
-          "id": "186",
-          "title": "Классификация ACEA",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14453425",
-              "value": "A5"
-            },
-            {
-              "id": "14453431",
-              "value": "B5"
-            },
-            {
-              "id": "14453439",
-              "value": "C1"
-            }
-          ]
-        },
-        {
-          "id": "180",
-          "title": "Классификация ILSAC",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14453326",
-              "value": "GF - 3"
-            },
-            {
-              "id": "14453327",
-              "value": "GF - 4"
-            }
-          ]
-        },
-        {
-          "id": "856",
-          "title": "Классификация JASO",
-          "type": "enum",
-          "values": [
-            {
-              "id": "14565935",
-              "value": "DL - 1"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "images": [
-    "https://img-wm.parts-index.com/images/fd/55/fd5533ca90e1bda57d431eabc95803a8.jpg"
-  ],
-  "apply": null,
-  "priceRange": {
-    "id": "",
-    "min": "",
-    "max": "",
-    "history": null
+  {
+    "ID": "678",
+    "~ID": "678",
+    "TIMESTAMP_X": "2023-12-27 17:42:55",
+    "~TIMESTAMP_X": "2023-12-27 17:42:55",
+    "MODIFIED_BY": "51082",
+    "~MODIFIED_BY": "51082",
+    "DATE_CREATE": "2023-12-27 17:42:55",
+    "~DATE_CREATE": "2023-12-27 17:42:55",
+    "CREATED_BY": "51082",
+    "~CREATED_BY": "51082",
+    "IBLOCK_ID": "150",
+    "~IBLOCK_ID": "150",
+    "IBLOCK_SECTION_ID": "645",
+    "~IBLOCK_SECTION_ID": "645",
+    "ACTIVE": "Y",
+    "~ACTIVE": "Y",
+    "GLOBAL_ACTIVE": "Y",
+    "~GLOBAL_ACTIVE": "Y",
+    "SORT": "500",
+    "~SORT": "500",
+    "NAME": "Кейсф API",
+    "~NAME": "Кейсф API",
+    "PICTURE": null,
+    "~PICTURE": null,
+    "LEFT_MARGIN": "26",
+    "~LEFT_MARGIN": "26",
+    "RIGHT_MARGIN": "29",
+    "~RIGHT_MARGIN": "29",
+    "DEPTH_LEVEL": "2",
+    "~DEPTH_LEVEL": "2",
+    "DESCRIPTION": "",
+    "~DESCRIPTION": "",
+    "DESCRIPTION_TYPE": "text",
+    "~DESCRIPTION_TYPE": "text",
+    "SEARCHABLE_CONTENT": "КЕЙСФ API\r\n",
+    "~SEARCHABLE_CONTENT": "КЕЙСФ API\r\n",
+    "CODE": "API_CASES",
+    "~CODE": "API_CASES",
+    "XML_ID": "",
+    "~XML_ID": "",
+    "TMP_ID": null,
+    "~TMP_ID": null,
+    "DETAIL_PICTURE": null,
+    "~DETAIL_PICTURE": null,
+    "SOCNET_GROUP_ID": null,
+    "~SOCNET_GROUP_ID": null,
+    "LIST_PAGE_URL": "/parts_index/index.php?ID=150",
+    "~LIST_PAGE_URL": "/parts_index/index.php?ID=150",
+    "SECTION_PAGE_URL": "/parts_index/list.php?SECTION_ID=678",
+    "~SECTION_PAGE_URL": "/parts_index/list.php?SECTION_ID=678",
+    "IBLOCK_TYPE_ID": "parts_index",
+    "~IBLOCK_TYPE_ID": "parts_index",
+    "IBLOCK_CODE": "information-card",
+    "~IBLOCK_CODE": "information-card",
+    "IBLOCK_EXTERNAL_ID": "130",
+    "~IBLOCK_EXTERNAL_ID": "130",
+    "EXTERNAL_ID": "",
+    "~EXTERNAL_ID": "",
+    "IPROPERTY_VALUES": []
   },
-  "links": []
-}
+  {
+    "ID": "679",
+    "~ID": "679",
+    "TIMESTAMP_X": "2023-12-27 17:46:18",
+    "~TIMESTAMP_X": "2023-12-27 17:46:18",
+    "MODIFIED_BY": "51082",
+    "~MODIFIED_BY": "51082",
+    "DATE_CREATE": "2023-12-27 17:43:53",
+    "~DATE_CREATE": "2023-12-27 17:43:53",
+    "CREATED_BY": "51082",
+    "~CREATED_BY": "51082",
+    "IBLOCK_ID": "150",
+    "~IBLOCK_ID": "150",
+    "IBLOCK_SECTION_ID": "678",
+    "~IBLOCK_SECTION_ID": "678",
+    "ACTIVE": "Y",
+    "~ACTIVE": "Y",
+    "GLOBAL_ACTIVE": "Y",
+    "~GLOBAL_ACTIVE": "Y",
+    "SORT": "500",
+    "~SORT": "500",
+    "NAME": "По бренду и артикулу",
+    "~NAME": "По бренду и артикулу",
+    "PICTURE": null,
+    "~PICTURE": null,
+    "LEFT_MARGIN": "27",
+    "~LEFT_MARGIN": "27",
+    "RIGHT_MARGIN": "28",
+    "~RIGHT_MARGIN": "28",
+    "DEPTH_LEVEL": "3",
+    "~DEPTH_LEVEL": "3",
+    "DESCRIPTION": "Сначала пользователь указывает артикул детали и получает список брендов",
+    "~DESCRIPTION": "Сначала пользователь указывает артикул детали и получает список брендов",
+    "DESCRIPTION_TYPE": "text",
+    "~DESCRIPTION_TYPE": "text",
+    "SEARCHABLE_CONTENT": "ПО БРЕНДУ И АРТИКУЛУ\r\nСНАЧАЛА ПОЛЬЗОВАТЕЛЬ УКАЗЫВАЕТ АРТИКУЛ ДЕТАЛИ И ПОЛУЧАЕТ СПИСОК БРЕНДОВ",
+    "~SEARCHABLE_CONTENT": "ПО БРЕНДУ И АРТИКУЛУ\r\nСНАЧАЛА ПОЛЬЗОВАТЕЛЬ УКАЗЫВАЕТ АРТИКУЛ ДЕТАЛИ И ПОЛУЧАЕТ СПИСОК БРЕНДОВ",
+    "CODE": "API_CASES_BRAND_ARTICLE",
+    "~CODE": "API_CASES_BRAND_ARTICLE",
+    "XML_ID": "",
+    "~XML_ID": "",
+    "TMP_ID": null,
+    "~TMP_ID": null,
+    "DETAIL_PICTURE": null,
+    "~DETAIL_PICTURE": null,
+    "SOCNET_GROUP_ID": null,
+    "~SOCNET_GROUP_ID": null,
+    "LIST_PAGE_URL": "/parts_index/index.php?ID=150",
+    "~LIST_PAGE_URL": "/parts_index/index.php?ID=150",
+    "SECTION_PAGE_URL": "/parts_index/list.php?SECTION_ID=679",
+    "~SECTION_PAGE_URL": "/parts_index/list.php?SECTION_ID=679",
+    "IBLOCK_TYPE_ID": "parts_index",
+    "~IBLOCK_TYPE_ID": "parts_index",
+    "IBLOCK_CODE": "information-card",
+    "~IBLOCK_CODE": "information-card",
+    "IBLOCK_EXTERNAL_ID": "130",
+    "~IBLOCK_EXTERNAL_ID": "130",
+    "EXTERNAL_ID": "",
+    "~EXTERNAL_ID": "",
+    "IPROPERTY_VALUES": []
+  }
+]

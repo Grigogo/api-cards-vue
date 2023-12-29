@@ -8,9 +8,18 @@ const selectedBrand = ref('');
 
 const emit = defineEmits(['get-detail-data']);
 
+// eslint-disable-next-line vue/max-len
+const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmpJZCI6IjgzNjgifQ._ANRn1x1ID_HqRE9EsV-4onyQK3VeyzMZPjXHIXRT8k';
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
+
 const fetchBrands = async () => {
   try {
-    const { data } = await axios.get(`https://a85f85ae0af7f164.mokky.dev/list?id=${article.value}`);
+    const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=ru`, config);
     brands.value = data;
   } catch (error) {
     console.error(error);
@@ -19,8 +28,8 @@ const fetchBrands = async () => {
 
 const fetchProduct = async () => {
   try {
-    const { data } = await axios.get(`https://a85f85ae0af7f164.mokky.dev/list?id=${article.value}&brand=${selectedBrand.value}`);
-    emit('get-detail-data', data);
+    const { data } = await axios.get(`https://api.parts-index.com/v1/entities?code=${article.value}&brand=${selectedBrand.value}&lang=ru`, config);
+    emit('get-detail-data', data.list);
   } catch (error) {
     console.error(error);
   }
@@ -50,25 +59,25 @@ const handleItemClick = (brand) => {
           ENG
         </option>
       </select>
-      30329726
+      4014835723498
     </div>
     <form action="" class="form-input">
       <div class="form-input__brand">
         <input
           id=""
           v-model="selectedBrand"
-          :disabled="!brands.length"
+          :disabled="!brands"
           placeholder="Бренд"
           type="text"
           name=""
         >
-        <ul v-show="brands.length" class="form-input__brand-list">
+        <ul v-show="brands" class="form-input__brand-list">
           <li
-            v-for="(item, id) in brands"
+            v-for="(item, id) in brands?.list"
             :key="id"
-            @click="handleItemClick(item.brand)"
+            @click="handleItemClick(item.name)"
           >
-            {{ item.brand }}
+            {{ item.name }}
           </li>
         </ul>
       </div>

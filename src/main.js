@@ -6,4 +6,4 @@ import App from './App.vue';
 const app = createApp(App);
 
 app.use(VueHighlightJS);
-app.mount('#app');
+app.mount('#app-cases');

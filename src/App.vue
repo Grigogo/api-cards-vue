@@ -17,6 +17,17 @@ const stepsData = {
     },
   ],
 };
+/* const data = JSON.parse(document.getElementById('app').getAttribute('data-my-data'));
+
+const dataSteps = data.ITEMS.map((item, index) => ({
+  step: index + 1,
+  text: item.NAME,
+}));
+
+const stepsData = {
+  title: data.SECTION.PATH.pop().DESCRIPTION,
+  steps: dataSteps,
+}; */
 
 const activeStep = ref(1);
 

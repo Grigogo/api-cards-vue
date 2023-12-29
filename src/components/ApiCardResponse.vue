@@ -1,4 +1,6 @@
 <script setup>
+import '../css/github-dark.css';
+
 defineProps({
   header: String,
   serverResponse: String,
