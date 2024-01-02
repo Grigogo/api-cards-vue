@@ -1,56 +1,53 @@
 <script setup>
-import { provide, ref } from 'vue';
-import 'bootstrap/dist/css/bootstrap.css';
-import ApiSteps from './components/ApiSteps.vue';
-import ApiMainForm from './components/ApiMainForm.vue';
+import { ref, provide } from 'vue';
+import ApiCards from './components/ApiCards.vue';
+import ApiCodeBrand from './components/ApiCodeBrand.vue';
+import ApiBrand from './components/ApiBrand.vue';
 
-const stepsData = {
-  title: 'Сначала пользователь указывает артикул детали и получает список брендов',
-  steps: [
-    {
-      step: 1,
-      text: 'Ввод артикула и выбор языка',
-    },
-    {
-      step: 2,
-      text: 'Получение информации о детали',
-    },
-  ],
+const showCards = ref('true');
+const activeCard = ref('');
+
+const cardList = [
+  {
+    id: 1,
+    title: 'Информация о детали по артикулу и бренду',
+    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
+  },
+  {
+    id: 2,
+    title: 'Получение брендов по артикулу',
+    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
+  },
+  {
+    id: 3,
+    title: 'Информации о детали по артикулу',
+    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
+  },
+  {
+    id: 4,
+    title: 'Детальная информации о конкретном бренде',
+    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
+  },
+]
+
+const setActiveCard = (data) => {
+  activeCard.value = data;
+  showCards.value = false;
 };
-/* const data = JSON.parse(document.getElementById('app').getAttribute('data-my-data'));
 
-const dataSteps = data.ITEMS.map((item, index) => ({
-  step: index + 1,
-  text: item.NAME,
-}));
-
-const stepsData = {
-  title: data.SECTION.PATH.pop().DESCRIPTION,
-  steps: dataSteps,
-}; */
-
-const activeStep = ref(1);
-
-function incrementStep() {
-  activeStep.value += 1;
+function backToCards() {
+  showCards.value = true;
+  activeCard.value = '';
 }
 
-function setStep(step) {
-  activeStep.value = step.step;
-}
-
-provide('activeStep', {
-  activeStep,
-  incrementStep,
-  setStep,
-});
-
+provide('backToCards', backToCards);
 </script>
 
 <template>
   <div class="container">
-    <ApiSteps :steps-data="stepsData" :active-step="activeStep" />
-    <ApiMainForm :active-step="activeStep" />
+    <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
+    <ApiCodeBrand v-if="activeCard == 1"/>
+    <ApiBrand v-if="activeCard == 2"/>
   </div>
 </template>
 

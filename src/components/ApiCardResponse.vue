@@ -4,7 +4,6 @@ import '../css/github-dark.css';
 defineProps({
   header: String,
   serverResponse: String,
-
 });
 
 </script>

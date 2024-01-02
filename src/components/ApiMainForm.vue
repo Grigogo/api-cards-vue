@@ -37,19 +37,32 @@ const getDetailData = (data) => {
 </template>
 
 <style lang="scss" scoped>
+@import '../scss/media';
 .api-wrapper-request {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-
-  &__main {
-    width: 70%;
-  }
 
   &__code {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 30%;
+    width: 100%;
   }
 }
+
+@include for-lg-min {
+  .api-wrapper-request {
+    flex-direction: row;
+
+    &__main {
+      width: 70%;
+    }
+
+    &__code {
+    width: 30%;
+  }
+  }
+}
+
 </style>

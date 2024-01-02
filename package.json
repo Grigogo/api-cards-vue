@@ -13,13 +13,13 @@
     "bootstrap": "^5.3.2",
     "highlight": "^0.2.4",
     "highlight.js": "^11.9.0",
+    "nvm": "^0.0.4",
     "pretty-print-json": "^2.1.0",
     "vue": "^3.3.8",
     "vue-plugin": "^0.0.1",
     "vue3-highlightjs": "^1.0.5"
   },
   "devDependencies": {
-    "@tradesoft/eslint-plugin": "1.5.1",
     "@vitejs/plugin-vue": "^4.5.0",
     "sass": "^1.69.5",
     "vite": "^5.0.0"

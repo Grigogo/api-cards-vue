@@ -2,13 +2,12 @@
 defineProps({
   detailData: Object,
 });
-
 </script>
 
 <template>
   <div class="detail">
     <div class="detail__image">
-      <img :src="detailData.images" alt="">
+      <img :src="detailData.images[0]" alt="">
     </div>
     <div class="detail__header">
       {{ detailData.originalName }}
@@ -16,7 +15,7 @@ defineProps({
 
     <div class="data-table__rows">
       <div
-        v-for="{ id, title, values } in detailData.parameters[0].params"
+        v-for="{ id, title, values } in detailData.parameters[0]?.params"
         :key="id"
         class="data-table__row"
       >
