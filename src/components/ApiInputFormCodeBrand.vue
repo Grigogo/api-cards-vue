@@ -8,6 +8,7 @@ const selectedBrand = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 const failRequest = ref(false);
+const showBrandList = ref(false);
 
 const emit = defineEmits(['get-detail-data']);
 
@@ -23,7 +24,13 @@ const config = {
 const fetchBrands = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
-    brands.value = data;
+    if (data?.list.length != 0) {
+      brands.value = data;
+      showBrandList.value = true;
+    } else {
+      showBrandList.value = false;
+      selectedBrand.value ='';
+    }
   } catch (error) {
     console.error(error);
   }
@@ -35,8 +42,9 @@ const fetchProduct = async () => {
     emit('get-detail-data', data.list);
     failRequest.value = false;
   } catch (error) {
+    selectedBrand.value ='';
     failRequest.value = true;
-    console.error('aaaaaa',error);
+    console.error(error);
   }
 };
 
@@ -49,7 +57,11 @@ const clickShowButton = () => {
 };
 
 const handleItemClick = (brand) => {
-  selectedBrand.value = brand;
+  if (!article.value) {
+    selectedBrand.value ='';
+  } else {
+    selectedBrand.value = brand;
+  }
 };
 
 const setLanguage = (event) => {
@@ -66,11 +78,9 @@ const setLanguage = (event) => {
       </select>
       4014835723498
     </div>
-    <form action="" class="form-input">
+    <form @submit.prevent action="" class="form-input">
       <div class="form-input__brand">
         <input
-        :hz="brands"
-          id=""
           :readonly="!brands.list?.length"
           v-model="selectedBrand"
           :disabled="!brands.list?.length"
@@ -78,7 +88,7 @@ const setLanguage = (event) => {
           type="text"
           name=""
         >
-        <ul v-show="brands.list?.length" class="form-input__brand-list">
+        <ul v-show="showBrandList" class="form-input__brand-list">
           <li
             v-for="(item, id) in brands?.list"
             :key="id"
@@ -230,6 +240,24 @@ const setLanguage = (event) => {
       position: absolute;
       top: 50px;
       width: 224px;
+      max-height: 240px;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+      scrollbar-color: hsl(0 0% 50%);
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-corner {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: hsl(0 0% 50%);
+        border-radius: 20px;
+      }
     }
   }
 

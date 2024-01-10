@@ -2,12 +2,14 @@
 import { ref, watch, inject } from 'vue';
 import ApiCardRequest from './ApiCardRequest.vue';
 import ApiCardResponse from './ApiCardResponse.vue';
-import ApiInputForm from './ApiInputForm.vue';
+import ApiInputFormCodeBrand from './ApiInputFormCodeBrand.vue';
+import ApiInputFormBrand from './ApiInputFormBrand.vue';
 import ApiDetailInfo from './ApiDetailInfo.vue';
 
 const detailData = ref('');
 const jsonStringFormattedResponse = ref('');
 const { activeStep, incrementStep } = inject('activeStep');
+const activeCard = inject('activeCard');
 
 defineProps({
   activeStep: Number,
@@ -25,7 +27,18 @@ const getDetailData = (data) => {
 
 <template>
   <div class="api-wrapper-request">
-    <div class="api-wrapper-request__main">
+    <div v-if="activeCard == 1" class="api-wrapper-request__main">
+      <ApiInputFormCodeBrand v-show="activeStep == 1" @get-detail-data="getDetailData" @set-active-step="activeStep" />
+      <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
+    </div>
+    <div v-if="activeCard == 2" class="api-wrapper-request__main">
+      <ApiInputFormBrand @get-detail-data="getDetailData" @set-active-step="activeStep" />
+    </div>
+    <div v-if="activeCard == 3" class="api-wrapper-request__main">
+      <ApiInputForm v-if="activeStep == 1" @get-detail-data="getDetailData" @set-active-step="activeStep" />
+      <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
+    </div>
+    <div v-if="activeCard == 4" class="api-wrapper-request__main">
       <ApiInputForm v-if="activeStep == 1" @get-detail-data="getDetailData" @set-active-step="activeStep" />
       <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
     </div>

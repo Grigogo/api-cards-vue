@@ -41,6 +41,7 @@ function backToCards() {
 }
 
 provide('backToCards', backToCards);
+provide('activeCard', activeCard);
 </script>
 
 <template>
