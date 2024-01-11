@@ -5,6 +5,8 @@ import ApiCardResponse from './ApiCardResponse.vue';
 import ApiInputFormCodeBrand from './ApiInputFormCodeBrand.vue';
 import ApiInputFormBrand from './ApiInputFormBrand.vue';
 import ApiDetailInfo from './ApiDetailInfo.vue';
+import ApiInputFormDetailArticle from './ApiInputFormDetailArticle.vue';
+import ApiInputFormBrandDetailInfo from './ApiInputFormBrandDetailInfo.vue'
 
 const detailData = ref('');
 const jsonStringFormattedResponse = ref('');
@@ -35,12 +37,11 @@ const getDetailData = (data) => {
       <ApiInputFormBrand @get-detail-data="getDetailData" @set-active-step="activeStep" />
     </div>
     <div v-if="activeCard == 3" class="api-wrapper-request__main">
-      <ApiInputForm v-if="activeStep == 1" @get-detail-data="getDetailData" @set-active-step="activeStep" />
-      <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
+      <ApiInputFormDetailArticle v-show="activeStep != 4" @get-detail-data="getDetailData" @set-active-step="activeStep" />
+      <ApiDetailInfo v-if="activeStep == 4" :detail-data="detailData[0]" />
     </div>
     <div v-if="activeCard == 4" class="api-wrapper-request__main">
-      <ApiInputForm v-if="activeStep == 1" @get-detail-data="getDetailData" @set-active-step="activeStep" />
-      <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
+      <ApiInputFormBrandDetailInfo @get-detail-data="getDetailData" @set-active-step="activeStep" :detail-data="detailData[0]" />
     </div>
     <div class="api-wrapper-request__code">
       <ApiCardRequest header="Запрос" />

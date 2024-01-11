@@ -3,6 +3,8 @@ import { ref, provide } from 'vue';
 import ApiCards from './components/ApiCards.vue';
 import ApiCodeBrand from './components/ApiCodeBrand.vue';
 import ApiBrand from './components/ApiBrand.vue';
+import ApiDetailArticle from './components/ApiDetailArticle.vue';
+import ApiBrandDetailInfo from './components/ApiBrandDetailInfo.vue';
 
 const showCards = ref('true');
 const activeCard = ref('');
@@ -47,8 +49,10 @@ provide('activeCard', activeCard);
 <template>
   <div class="container">
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
-    <ApiCodeBrand v-if="activeCard == 1"/>
-    <ApiBrand v-if="activeCard == 2"/>
+    <ApiCodeBrand v-if="activeCard == 1" />
+    <ApiBrand v-if="activeCard == 2" />
+    <ApiDetailArticle v-if="activeCard == 3" />
+    <ApiBrandDetailInfo v-if="activeCard == 4" />
   </div>
 </template>
 

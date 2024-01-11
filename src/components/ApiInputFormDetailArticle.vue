@@ -1,15 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import axios from 'axios';
 
 const article = ref('');
 const brands = ref('');
+const brandInfo = ref('');
 const selectedBrand = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
-const failRequest = ref(false);
-const showBrandList = ref(false);
-
+let failRequest = ref(false);
+const { activeStep } = inject('activeStep');
 const emit = defineEmits(['get-detail-data']);
 
 // eslint-disable-next-line vue/max-len
@@ -24,14 +24,10 @@ const config = {
 const fetchBrands = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
-    if (data?.list.length != 0) {
-      brands.value = data;
-      showBrandList.value = true;
-    } else {
-      showBrandList.value = false;
-      selectedBrand.value ='';
-    }
+    brands.value = data;
+    failRequest.value = false;
   } catch (error) {
+    failRequest.value = true;
     console.error(error);
   }
 };
@@ -40,64 +36,53 @@ const fetchProduct = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/entities?code=${article.value}&brand=${selectedBrand.value}&lang=${langValue.value}`, config);
     emit('get-detail-data', data.list);
-    failRequest.value = false;
+
   } catch (error) {
     selectedBrand.value ='';
-    failRequest.value = true;
     console.error(error);
   }
 };
 
 const onChangeInputArticle = () => {
   fetchBrands();
+  if(article && brandInfo.value.list != 0) {
+    activeStep.value = 2;
+  }
 };
 
 const clickShowButton = () => {
-  fetchProduct();
-};
-
-const handleItemClick = (brand) => {
-  if (!article.value) {
-    selectedBrand.value ='';
+  if (brands.value.list != 0) {
+    activeStep.value = 3;
   } else {
-    selectedBrand.value = brand;
+    console.log(failRequest.value);
+    failRequest.value = true;
+    console.log(failRequest.value);
   }
 };
 
 const setLanguage = (event) => {
   langValue.value = event.target.value;
 }
+
+const handleItemClick = (brand) => {
+  selectedBrand.value = brand;
+  console.log(selectedBrand.value);
+  fetchProduct();
+};
+
 </script>
 
 <template>
-  <div class="search-block">
-    <div class="search-block__lang">
+  <div class="search-block" :class="{alignitemsstart: activeStep == 4}">
+    <div v-if="activeStep !== 4" class="search-block__lang">
       <select @change="setLanguage" id="" name="">
         <option value="ru">RUS</option>
         <option value="en">ENG</option>
       </select>
       4014835723498
     </div>
-    <form @submit.prevent action="" class="form-input">
-      <div class="form-input__brand">
-        <input
-          :readonly="!brands.list?.length"
-          v-model="selectedBrand"
-          :disabled="!brands.list?.length"
-          placeholder="Бренд"
-          type="text"
-          name=""
-        >
-        <ul v-show="showBrandList" class="form-input__brand-list">
-          <li
-            v-for="(item, id) in brands?.list"
-            :key="id"
-            @click="handleItemClick(item.name)"
-          >
-            {{ item.name }}
-          </li>
-        </ul>
-      </div>
+
+    <form @submit.prevent v-show="activeStep == 1 || activeStep == 2" action="" class="form-input">
       <div>
         <input
           id=""
@@ -108,17 +93,124 @@ const setLanguage = (event) => {
           @input="onChangeInputArticle"
         >
       </div>
-      <button type="button" :disabled="!selectedBrand" @click.prevent="clickShowButton">
-        Показать деталь
+      <button type="button" :disabled="!article" @click.prevent="clickShowButton">
+        Показать бренды
       </button>
       <div v-show="failRequest">{{ failGetData }}</div>
     </form>
+
+    <div v-show="activeStep == 3" class="brands">
+      <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Выберите бренд</div>
+      <ul v-show="brands.list?.length" class="brand-list__list">
+        <li
+          v-for="(item, id) in brands?.list"
+          :key="id"
+          @click="handleItemClick(item.name)"
+        >
+          {{ item.name }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M8.99991 17L13.4999 12L8.99991 7L10 6L16 12L10 18L8.99991 17Z" fill="black" fill-opacity="0.24"/>
+          </svg>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
+
+
+.brand {
+  width: 100%;
+  margin: 24px 32px;
+}
+.brand-info {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 16px;
+  color: #000;
+  font-size: 16px;
+  line-height: 160%;
+  margin-bottom: 16px;
+
+  &__name {
+    width: 35%;
+  }
+
+  &__descr {
+    width: 65%;
+    div {
+      display: inline-block;
+      padding-right: 8px;
+    }
+
+    a {
+      color: $blue;
+      cursor: pointer;
+
+      &:hover {
+        color: $lightblue;
+      }
+    }
+  }
+}
+.brands {
+  width: 392px;
+}
+
+.mt36 {
+  margin-top: 36px;
+}
+
+.alignitemsstart {
+  align-items: start !important;
+}
+.brand-list {
+  &__header {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 114%;
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    width: 100%;
+    max-height: 360px;
+    overflow-y: scroll;
+
+    li {
+      color: #000;
+      font-size: 18px;
+      font-weight: 400;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 16px 12px;
+      border-bottom: 1px solid $grey;
+      cursor: pointer;
+      transition: all ease .3s;
+
+      &:first-child {
+        border-top: 1px solid $grey;
+
+        &:hover {
+          border-bottom: 1px solid $white;
+          border-top: 1px solid $white;
+        }
+      }
+
+      &:hover {
+        background-color: $whiteblue;
+        border-radius: 8px;
+        border-bottom: none;
+      }
+    }
+  }
+}
 
 .form-input {
   display: flex;
@@ -145,11 +237,6 @@ const setLanguage = (event) => {
         cursor: pointer;
       }
     }
-  }
-
-  &__brand-list {
-    max-height: 200px;
-    overflow-y: scroll;
   }
 
   input {
@@ -245,24 +332,6 @@ const setLanguage = (event) => {
       position: absolute;
       top: 50px;
       width: 224px;
-      max-height: 240px;
-      overflow-y: scroll;
-      scrollbar-width: thin;
-      scrollbar-color: hsl(0 0% 50%);
-
-      &::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-
-      &::-webkit-scrollbar-corner {
-        background: transparent;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: hsl(0 0% 50%);
-        border-radius: 20px;
-      }
     }
   }
 

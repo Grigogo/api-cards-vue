@@ -2,16 +2,13 @@
 import { ref, inject } from 'vue';
 import axios from 'axios';
 
-const article = ref('');
-const brands = ref('');
 const brandInfo = ref('');
-const selectedBrand = ref('');
+const brand = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
 const { activeStep, incrementStep } = inject('activeStep');
 const emit = defineEmits(['get-detail-data']);
-
 
 // eslint-disable-next-line vue/max-len
 const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmpJZCI6IjgzNjgifQ._ANRn1x1ID_HqRE9EsV-4onyQK3VeyzMZPjXHIXRT8k';
@@ -22,39 +19,13 @@ const config = {
   },
 };
 
-const fetchBrands = async () => {
+const fetchBrand = async () => {
   try {
-    const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
-    brands.value = data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const fetchProduct = async () => {
-  try {
-    const { data } = await axios.get(`https://api.parts-index.com/v1/brands/parse?q=${selectedBrand.value}&lang=${langValue.value}`, config);
-    brandInfo.value = data;
-    failRequest.value = false;
+    const { data } = await axios.get(`https://api.parts-index.com/v1/brands/parse?q=${brand.value}&lang=${langValue.value}`, config);
+    brandInfo.value = data.list;
     emit('get-detail-data', data.list);
   } catch (error) {
-    failRequest.value = true;
     console.error(error);
-  }
-};
-
-const onChangeInputArticle = () => {
-  fetchBrands();
-  if(article) {
-    activeStep.value = 2;
-  }
-};
-
-const clickShowButton = () => {
-  if (brandInfo.value.list != 0) {
-    activeStep.value = 3;
-  } else {
-    failRequest = true;
   }
 };
 
@@ -62,88 +33,84 @@ const setLanguage = (event) => {
   langValue.value = event.target.value;
 }
 
-const handleItemClick = (brand) => {
-  selectedBrand.value = brand;
-  fetchProduct();
-};
+const handleButtonClick = () => {
+  fetchBrand();
+  console.log(brandInfo.value.length);
+  if (brandInfo.value.length) {
+    activeStep.value = 2;
+  } else {
+    failRequest.value = true;
+  }
+}
+
+const changeInput = () => {
+  fetchBrand();
+  failRequest.value = false;
+}
 
 </script>
 
 <template>
-  <div class="search-block" :class="{alignitemsstart: activeStep == 4}">
-    <div v-if="activeStep !== 4" class="search-block__lang">
-      <select @change="setLanguage" id="" name="">
-        <option value="ru">RUS</option>
-        <option value="en">ENG</option>
-      </select>
-      4014835723498
-    </div>
-
-    <form @submit.prevent v-show="activeStep == 1 || activeStep == 2" action="" class="form-input">
-      <div>
-        <input
-          id=""
-          v-model="article"
-          placeholder="Артикул"
-          type="text"
-          name=""
-          @input="onChangeInputArticle"
-        >
+  <div class="search-block">
+    <div v-show="activeStep == 1" >
+      <div v-if="activeStep !== 2" class="search-block__lang">
+        <select @change="setLanguage" id="" name="">
+          <option value="ru">RUS</option>
+          <option value="en">ENG</option>
+        </select>
+        4014835723498
       </div>
-      <button type="button" :disabled="!article" @click.prevent="clickShowButton">
-        Показать бренды
-      </button>
-      <div v-show="failRequest">{{ failGetData }}</div>
-    </form>
 
-    <div v-show="activeStep == 3" class="brands">
-      <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Выберите бренд</div>
-      <ul v-show="brands.list?.length" class="brand-list__list">
-        <li
-          v-for="(item, id) in brands?.list"
-          :key="id"
-          @click="handleItemClick(item.name)"
-        >
-          {{ item.name }}
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M8.99991 17L13.4999 12L8.99991 7L10 6L16 12L10 18L8.99991 17Z" fill="black" fill-opacity="0.24"/>
-          </svg>
-        </li>
-      </ul>
+      <form @submit.prevent action="" class="form">
+        <div class="form">
+          <input
+            id=""
+            v-model="brand"
+            placeholder="Бренд"
+            type="text"
+            name=""
+            @input="changeInput"
+          >
+        </div>
+        <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">
+          Показать бренд
+        </button>
+        <div v-show="failRequest">{{ failGetData }}</div>
+      </form>
     </div>
 
-    <div class="brand" v-if="activeStep == 4">
+    <div class="brand" v-if="activeStep == 2">
       <div class="brand-list__header">Информация о бренде</div>
-      <div v-if="brandInfo.list[0].id" class="brand-info">
+      <div v-if="brandInfo[0].id" class="brand-info">
         <div class="brand-info__name">
           ID
         </div>
         <div class="brand-info__descr">
-          {{ brandInfo.list[0].id }}
+          {{ brandInfo[0].id }}
         </div>
       </div>
-      <div v-if="brandInfo.list[0].name" class="brand-info">
+      <div v-if="brandInfo[0].name" class="brand-info">
         <div class="brand-info__name">
           Название оригинальное
         </div>
         <div class="brand-info__descr">
-          {{ brandInfo.list[0].name }}
+          {{ brandInfo[0].name }}
         </div>
       </div>
-      <div v-if="brandInfo.list[0].source" class="brand-info">
+      <div v-if="brandInfo[0].source" class="brand-info">
         <div class="brand-info__name">
           Название наше
         </div>
         <div class="brand-info__descr">
-          {{ brandInfo.list[0].source }}
+          {{ brandInfo[0].source }}
         </div>
       </div>
-      <div v-show="brandInfo.list[0].synonyms.length != 0" class="brand-info">
+      <div v-show="brandInfo[0].synonyms.length != 0" class="brand-info">
         <div class="brand-info__name">
           Синонимы бренда
         </div>
         <div class="brand-info__descr">
-          <div v-for="(item, idx) in brandInfo.list[0].synonyms" :key="idx">
+          <div v-for="(item, idx) in brandInfo[0].synonyms" :key="idx">
             {{ item }}
           </div>
         </div>
@@ -198,6 +165,14 @@ const handleItemClick = (brand) => {
 @import "/src/scss/global.scss";
 
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
 .brand {
   width: 100%;
 }
@@ -234,7 +209,6 @@ const handleItemClick = (brand) => {
 }
 .brands {
   width: 392px;
-  margin-top: 48px;
 }
 
 .alignitemsstart {
@@ -450,6 +424,28 @@ const handleItemClick = (brand) => {
       padding: 10px 8px;
     }
   }
+
+  .form-input {
+
+  &__brand {
+    width: 204px;
+    input {
+      width: 204px;
+    }
+
+    &-list {
+      width: 204px;
+    }
+  }
+
+  input {
+    width: 204px;
+  }
+
+  button {
+    padding: 10px 8px;
+  }
+}
 
   .search-block {
     min-width: 630px;
