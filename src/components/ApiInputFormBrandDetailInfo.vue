@@ -48,21 +48,25 @@ const changeInput = () => {
   failRequest.value = false;
 }
 
+const setArticle = (event) => {
+  brand.value = event.target.getAttribute('value');
+  fetchBrand();
+}
+
 </script>
 
 <template>
   <div class="search-block">
-    <div v-show="activeStep == 1" >
+    <div class="w100" v-show="activeStep == 1" >
       <div v-if="activeStep !== 2" class="search-block__lang">
         <select @change="setLanguage" id="" name="">
           <option value="ru">RUS</option>
           <option value="en">ENG</option>
         </select>
-        4014835723498
       </div>
 
-      <form @submit.prevent action="" class="form">
-        <div class="form">
+      <form @submit.prevent action="" class="form-input">
+        <div class="width100">
           <input
             id=""
             v-model="brand"
@@ -71,6 +75,11 @@ const changeInput = () => {
             name=""
             @input="changeInput"
           >
+          <div class="sample">
+            Пример:
+            <span @click="setArticle" value="Bremi">Bremi</span>
+            <span @click="setArticle" value="Mann Filter">&nbsp Mann Filter</span>
+            </div>
         </div>
         <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">
           Показать бренд
@@ -164,7 +173,9 @@ const changeInput = () => {
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
 
-
+.w100 {
+  width: 100%;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -424,28 +435,6 @@ const changeInput = () => {
       padding: 10px 8px;
     }
   }
-
-  .form-input {
-
-  &__brand {
-    width: 204px;
-    input {
-      width: 204px;
-    }
-
-    &-list {
-      width: 204px;
-    }
-  }
-
-  input {
-    width: 204px;
-  }
-
-  button {
-    padding: 10px 8px;
-  }
-}
 
   .search-block {
     min-width: 630px;

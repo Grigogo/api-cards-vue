@@ -28,7 +28,7 @@ defineProps({
   padding: 16px;
   width: 100%;
   color: #ffffff;
-  height: 530px;
+  height: 570px;
 
   pre {
     max-height: 95%;

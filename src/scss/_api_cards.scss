@@ -1,0 +1,33 @@
+
+.hljs {
+  background: none !important;
+  color: $white;
+
+  &-attr {
+    color: #92c1ff;
+  }
+
+  &-string {
+    color: #92c1ff;
+  }
+
+  &-literal {
+    color: #ffe195;
+  }
+}
+
+.sample {
+  color: $grey;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  cursor: pointer;
+  display: block;
+  margin-top: 8px;
+
+  span {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -67,6 +67,11 @@ const handleItemClick = (brand) => {
 const setLanguage = (event) => {
   langValue.value = event.target.value;
 }
+
+const setArticle = (event) => {
+  article.value = event.target.getAttribute('value');
+  fetchBrands();
+}
 </script>
 
 <template>
@@ -76,7 +81,6 @@ const setLanguage = (event) => {
         <option value="ru">RUS</option>
         <option value="en">ENG</option>
       </select>
-      4014835723498
     </div>
     <form @submit.prevent action="" class="form-input">
       <div class="form-input__brand">
@@ -88,7 +92,7 @@ const setLanguage = (event) => {
           type="text"
           name=""
         >
-        <ul v-show="showBrandList" class="form-input__brand-list">
+        <ul v-show="showBrandList" class="form-input__brand-list" :class="{overflow: brands.list?.length > 6}">
           <li
             v-for="(item, id) in brands?.list"
             :key="id"
@@ -107,6 +111,9 @@ const setLanguage = (event) => {
           name=""
           @input="onChangeInputArticle"
         >
+        <div class="sample">
+          <span @click="setArticle" value="4014835723498">Пример: 4014835723498</span>
+        </div>
       </div>
       <button type="button" :disabled="!selectedBrand" @click.prevent="clickShowButton">
         Показать деталь
@@ -120,6 +127,10 @@ const setLanguage = (event) => {
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
 
+
+.overflow {
+  overflow-y: scroll;
+}
 .form-input {
   display: flex;
   flex-direction: column;

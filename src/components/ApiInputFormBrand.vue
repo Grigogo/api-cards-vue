@@ -67,6 +67,11 @@ const handleItemClick = (brand) => {
   fetchProduct();
 };
 
+const setArticle = (event) => {
+  article.value = event.target.getAttribute('value');
+  fetchBrands();
+}
+
 </script>
 
 <template>
@@ -76,7 +81,6 @@ const handleItemClick = (brand) => {
         <option value="ru">RUS</option>
         <option value="en">ENG</option>
       </select>
-      4014835723498
     </div>
 
     <form @submit.prevent v-show="activeStep == 1 || activeStep == 2" action="" class="form-input">
@@ -89,6 +93,9 @@ const handleItemClick = (brand) => {
           name=""
           @input="onChangeInputArticle"
         >
+        <div class="sample">
+          <span @click="setArticle" value="4014835723498">Пример: 4014835723498</span>
+        </div>
       </div>
       <button type="button" :disabled="!article" @click.prevent="clickShowButton">
         Показать бренды
@@ -98,7 +105,7 @@ const handleItemClick = (brand) => {
 
     <div v-show="activeStep == 3" class="brands">
       <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Выберите бренд</div>
-      <ul v-show="brands.list?.length" class="brand-list__list">
+      <ul v-show="brands.list?.length" class="brand-list__list" :class="{overflow: brands.list?.length > 6}">
         <li
           v-for="(item, id) in brands?.list"
           :key="id"
@@ -197,6 +204,9 @@ const handleItemClick = (brand) => {
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
 
+.overflow {
+  overflow-y: scroll;
+}
 
 .brand {
   width: 100%;
@@ -250,6 +260,23 @@ const handleItemClick = (brand) => {
 
   &__list {
     width: 100%;
+    max-height: 360px;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0 0% 50%);
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: hsl(0 0% 50%);
+      border-radius: 20px;
+    }
 
     li {
       color: #000;
