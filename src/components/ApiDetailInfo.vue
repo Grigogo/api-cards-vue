@@ -40,6 +40,12 @@ defineProps({
   border: 1px solid #DBDFE9;
   border-radius: 8px;
 
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
   .divider {
     border-bottom: 1px dotted #6a6a6a;
   }

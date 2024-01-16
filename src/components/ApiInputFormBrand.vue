@@ -1,6 +1,7 @@
 <script setup>
 import { ref, inject } from 'vue';
 import axios from 'axios';
+import debounce from 'debounce';
 
 const article = ref('');
 const brands = ref('');
@@ -10,6 +11,7 @@ const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
 const { activeStep, incrementStep } = inject('activeStep');
+
 const emit = defineEmits(['get-detail-data']);
 
 
@@ -27,6 +29,7 @@ const fetchBrands = async () => {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
     brands.value = data;
   } catch (error) {
+    failRequest.value = true;
     console.error(error);
   }
 };
@@ -34,27 +37,30 @@ const fetchBrands = async () => {
 const fetchProduct = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/parse?q=${selectedBrand.value}&lang=${langValue.value}`, config);
-    brandInfo.value = data;
-    failRequest.value = false;
+    brandInfo.value = data.list;
     emit('get-detail-data', data.list);
+    failRequest.value = false;
   } catch (error) {
     failRequest.value = true;
     console.error(error);
   }
 };
 
-const onChangeInputArticle = () => {
-  fetchBrands();
+
+const changeInputArticle = () => {
   if(article) {
     activeStep.value = 2;
+  } else {
   }
-};
+}
 
 const clickShowButton = () => {
-  if (brandInfo.value.list != 0) {
-    activeStep.value = 3;
+  fetchBrands();
+  if (brands.value.list?.length > 0) {
+    incrementStep();
+    failRequest.value = false;
   } else {
-    failRequest = true;
+    failRequest.value = true;
   }
 };
 
@@ -65,6 +71,7 @@ const setLanguage = (event) => {
 const handleItemClick = (brand) => {
   selectedBrand.value = brand;
   fetchProduct();
+  incrementStep();
 };
 
 const setArticle = (event) => {
@@ -91,16 +98,16 @@ const setArticle = (event) => {
           placeholder="Артикул"
           type="text"
           name=""
-          @input="onChangeInputArticle"
+          @input="changeInputArticle"
         >
         <div class="sample">
-          <span @click="setArticle" value="4014835723498">Пример: 4014835723498</span>
+          Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
         </div>
       </div>
       <button type="button" :disabled="!article" @click.prevent="clickShowButton">
         Показать бренды
       </button>
-      <div v-show="failRequest">{{ failGetData }}</div>
+      <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </form>
 
     <div v-show="activeStep == 3" class="brands">
@@ -117,86 +124,8 @@ const setArticle = (event) => {
           </svg>
         </li>
       </ul>
+      <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </div>
-
-    <div class="brand" v-if="activeStep == 4">
-      <div class="brand-list__header">Информация о бренде</div>
-      <div v-if="brandInfo.list[0].id" class="brand-info">
-        <div class="brand-info__name">
-          ID
-        </div>
-        <div class="brand-info__descr">
-          {{ brandInfo.list[0].id }}
-        </div>
-      </div>
-      <div v-if="brandInfo.list[0].name" class="brand-info">
-        <div class="brand-info__name">
-          Название оригинальное
-        </div>
-        <div class="brand-info__descr">
-          {{ brandInfo.list[0].name }}
-        </div>
-      </div>
-      <div v-if="brandInfo.list[0].source" class="brand-info">
-        <div class="brand-info__name">
-          Название наше
-        </div>
-        <div class="brand-info__descr">
-          {{ brandInfo.list[0].source }}
-        </div>
-      </div>
-      <div v-show="brandInfo.list[0].synonyms.length != 0" class="brand-info">
-        <div class="brand-info__name">
-          Синонимы бренда
-        </div>
-        <div class="brand-info__descr">
-          <div v-for="(item, idx) in brandInfo.list[0].synonyms" :key="idx">
-            {{ item }}
-          </div>
-        </div>
-      </div>
-<!--       <div class="brand-info">
-        <div class="brand-info__name">
-          Описание
-        </div>
-        <div class="brand-info__descr">
-          Для современного мира понимание сути ресурсосберегающих технологий играет определяющее значение для существующих финансовых и административных условий.
-        </div>
-      </div>
-      <div class="brand-info">
-        <div class="brand-info__name">
-          Страна производитель
-        </div>
-        <div class="brand-info__descr">
-          Германия
-        </div>
-      </div>
-      <div class="brand-info">
-        <div class="brand-info__name">
-          Cайт бренда
-        </div>
-        <div class="brand-info__descr">
-          <a href="mann-filter.com">mann-filter.com</a>
-        </div>
-      </div>
-      <div class="brand-info">
-        <div class="brand-info__name">
-          E-mail бренда
-        </div>
-        <div class="brand-info__descr">
-          <a href="mailto:info@mann-filter.com">info@mann-filter.com</a>
-        </div>
-      </div>
-      <div class="brand-info">
-        <div class="brand-info__name">
-          Адрес бренда
-        </div>
-        <div class="brand-info__descr">
-          2715 Ash Dr. San Jose, South Dakota 83475
-        </div>
-      </div> -->
-    </div>
-
   </div>
 </template>
 
@@ -208,40 +137,6 @@ const setArticle = (event) => {
   overflow-y: scroll;
 }
 
-.brand {
-  width: 100%;
-}
-.brand-info {
-  display: flex;
-  flex-direction: row;
-  align-items: start;
-  gap: 16px;
-  color: #000;
-  font-size: 16px;
-  line-height: 160%;
-  margin-bottom: 16px;
-
-  &__name {
-    width: 35%;
-  }
-
-  &__descr {
-    width: 65%;
-    div {
-      display: inline-block;
-      padding-right: 8px;
-    }
-
-    a {
-      color: $blue;
-      cursor: pointer;
-
-      &:hover {
-        color: $lightblue;
-      }
-    }
-  }
-}
 .brands {
   width: 392px;
   margin-top: 48px;
@@ -251,12 +146,6 @@ const setArticle = (event) => {
   align-items: start !important;
 }
 .brand-list {
-  &__header {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 114%;
-    margin-bottom: 12px;
-  }
 
   &__list {
     width: 100%;
@@ -301,7 +190,7 @@ const setArticle = (event) => {
 
       &:hover {
         background-color: $whiteblue;
-        border-radius: 8px;
+        border-radius: 4px;
         border-bottom: none;
       }
     }
@@ -326,7 +215,7 @@ const setArticle = (event) => {
 
     &-list {
       border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 8px 16px;
 
       li:hover {
@@ -337,11 +226,6 @@ const setArticle = (event) => {
   }
 
   input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-
     &:disabled {
       background: rgba(0, 0, 0, 0.08);
       cursor: default;
@@ -364,7 +248,7 @@ const setArticle = (event) => {
     background-color: $green;
     color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     white-space: nowrap;
 
     &:disabled {
@@ -411,15 +295,6 @@ const setArticle = (event) => {
 }
 
 @include for-lg-min {
-
-  .brand-list {
-  &__header {
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 114%;
-    margin-bottom: 24px;
-  }
-}
 
   .brand {
     width: 100%;

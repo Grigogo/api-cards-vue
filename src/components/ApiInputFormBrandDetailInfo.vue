@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, inject, watch } from 'vue';
 import axios from 'axios';
 
 const brandInfo = ref('');
@@ -7,7 +7,7 @@ const brand = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
-const { activeStep, incrementStep } = inject('activeStep');
+const { activeStep} = inject('activeStep');
 const emit = defineEmits(['get-detail-data']);
 
 // eslint-disable-next-line vue/max-len
@@ -19,7 +19,7 @@ const config = {
   },
 };
 
-const fetchBrand = async () => {
+const fetchBrandInfo = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/parse?q=${brand.value}&lang=${langValue.value}`, config);
     brandInfo.value = data.list;
@@ -33,9 +33,8 @@ const setLanguage = (event) => {
   langValue.value = event.target.value;
 }
 
-const handleButtonClick = () => {
-  fetchBrand();
-  console.log(brandInfo.value.length);
+const handleButtonClick = async () => {
+  await fetchBrandInfo();
   if (brandInfo.value.length) {
     activeStep.value = 2;
   } else {
@@ -43,14 +42,8 @@ const handleButtonClick = () => {
   }
 }
 
-const changeInput = () => {
-  fetchBrand();
-  failRequest.value = false;
-}
-
 const setArticle = (event) => {
   brand.value = event.target.getAttribute('value');
-  fetchBrand();
 }
 
 </script>
@@ -73,7 +66,6 @@ const setArticle = (event) => {
             placeholder="Бренд"
             type="text"
             name=""
-            @input="changeInput"
           >
           <div class="sample">
             Пример:
@@ -84,26 +76,26 @@ const setArticle = (event) => {
         <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">
           Показать бренд
         </button>
-        <div v-show="failRequest">{{ failGetData }}</div>
+        <div class="alert" v-show="failRequest">{{ failGetData }}</div>
       </form>
     </div>
 
     <div class="brand" v-if="activeStep == 2">
       <div class="brand-list__header">Информация о бренде</div>
-      <div v-if="brandInfo[0].id" class="brand-info">
+      <div v-if="brandInfo.id" class="brand-info">
         <div class="brand-info__name">
           ID
         </div>
         <div class="brand-info__descr">
-          {{ brandInfo[0].id }}
+          {{ brandInfo.id }}
         </div>
       </div>
-      <div v-if="brandInfo[0].name" class="brand-info">
+      <div v-if="brandInfo.name" class="brand-info">
         <div class="brand-info__name">
           Название оригинальное
         </div>
         <div class="brand-info__descr">
-          {{ brandInfo[0].name }}
+          {{ brandInfo.name }}
         </div>
       </div>
       <div v-if="brandInfo[0].source" class="brand-info">
@@ -111,7 +103,7 @@ const setArticle = (event) => {
           Название наше
         </div>
         <div class="brand-info__descr">
-          {{ brandInfo[0].source }}
+          {{ brandInfo.source }}
         </div>
       </div>
       <div v-show="brandInfo[0].synonyms.length != 0" class="brand-info">
@@ -187,37 +179,7 @@ const setArticle = (event) => {
 .brand {
   width: 100%;
 }
-.brand-info {
-  display: flex;
-  flex-direction: row;
-  align-items: start;
-  gap: 16px;
-  color: #000;
-  font-size: 16px;
-  line-height: 160%;
-  margin-bottom: 16px;
 
-  &__name {
-    width: 35%;
-  }
-
-  &__descr {
-    width: 65%;
-    div {
-      display: inline-block;
-      padding-right: 8px;
-    }
-
-    a {
-      color: $blue;
-      cursor: pointer;
-
-      &:hover {
-        color: $lightblue;
-      }
-    }
-  }
-}
 .brands {
   width: 392px;
 }
@@ -226,12 +188,6 @@ const setArticle = (event) => {
   align-items: start !important;
 }
 .brand-list {
-  &__header {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 114%;
-    margin-bottom: 12px;
-  }
 
   &__list {
     width: 100%;
@@ -259,7 +215,7 @@ const setArticle = (event) => {
 
       &:hover {
         background-color: $whiteblue;
-        border-radius: 8px;
+        border-radius: 4px;
         border-bottom: none;
       }
     }
@@ -284,34 +240,12 @@ const setArticle = (event) => {
 
     &-list {
       border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 8px 16px;
 
       li:hover {
         text-decoration: underline;
         cursor: pointer;
-      }
-    }
-  }
-
-  input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-
-    &:disabled {
-      background: rgba(0, 0, 0, 0.08);
-      cursor: default;
-
-      &:hover {
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-      }
-
-      &:focus {
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
       }
     }
   }
@@ -322,7 +256,7 @@ const setArticle = (event) => {
     background-color: $green;
     color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     white-space: nowrap;
 
     &:disabled {
@@ -369,15 +303,6 @@ const setArticle = (event) => {
 }
 
 @include for-lg-min {
-
-  .brand-list {
-  &__header {
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 114%;
-    margin-bottom: 24px;
-  }
-}
 
   .brand {
     width: 100%;

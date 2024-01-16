@@ -97,13 +97,13 @@ const setArticle = (event) => {
           @input="onChangeInputArticle"
         >
         <div class="sample">
-          <span @click="setArticle" value="4014835723498">Пример: 4014835723498</span>
+          Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
         </div>
       </div>
       <button type="button" :disabled="!article" @click.prevent="clickShowButton">
         Показать бренды
       </button>
-      <div v-show="failRequest">{{ failGetData }}</div>
+      <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </form>
 
     <div v-show="activeStep == 3" class="brands">
@@ -181,12 +181,6 @@ const setArticle = (event) => {
   align-items: start !important;
 }
 .brand-list {
-  &__header {
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 114%;
-    margin-bottom: 24px;
-  }
 
   &__list {
     width: 100%;
@@ -232,7 +226,7 @@ const setArticle = (event) => {
 
       &:hover {
         background-color: $whiteblue;
-        border-radius: 8px;
+        border-radius: 4px;
         border-bottom: none;
       }
     }
@@ -256,34 +250,12 @@ const setArticle = (event) => {
 
     &-list {
       border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 8px 16px;
 
       li:hover {
         text-decoration: underline;
         cursor: pointer;
-      }
-    }
-  }
-
-  input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-
-    &:disabled {
-      background: rgba(0, 0, 0, 0.08);
-      cursor: default;
-
-      &:hover {
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-      }
-
-      &:focus {
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
       }
     }
   }
@@ -294,7 +266,7 @@ const setArticle = (event) => {
     background-color: $green;
     color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     white-space: nowrap;
 
     &:disabled {

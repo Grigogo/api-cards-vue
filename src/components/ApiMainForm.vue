@@ -6,7 +6,8 @@ import ApiInputFormCodeBrand from './ApiInputFormCodeBrand.vue';
 import ApiInputFormBrand from './ApiInputFormBrand.vue';
 import ApiDetailInfo from './ApiDetailInfo.vue';
 import ApiInputFormDetailArticle from './ApiInputFormDetailArticle.vue';
-import ApiInputFormBrandDetailInfo from './ApiInputFormBrandDetailInfo.vue'
+import ApiInputFormBrandDetailInfo from './ApiInputFormBrandDetailInfo.vue';
+import BrandInfo from './BrandInfo.vue';
 
 const detailData = ref('');
 const jsonStringFormattedResponse = ref('');
@@ -25,6 +26,10 @@ const getDetailData = (data) => {
   detailData.value = data;
   incrementStep();
 };
+
+const getBrandData = (data) => {
+  detailData.value = data;
+};
 </script>
 
 <template>
@@ -34,14 +39,16 @@ const getDetailData = (data) => {
       <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
     </div>
     <div v-if="activeCard == 2" class="api-wrapper-request__main">
-      <ApiInputFormBrand @get-detail-data="getDetailData" @set-active-step="activeStep" />
+      <ApiInputFormBrand v-show="activeStep != 4" @get-detail-data="getBrandData" @set-active-step="activeStep" />
+      <BrandInfo v-if="activeStep == 4" :detail-data="detailData[0]" />
     </div>
     <div v-if="activeCard == 3" class="api-wrapper-request__main">
       <ApiInputFormDetailArticle v-show="activeStep != 4" @get-detail-data="getDetailData" @set-active-step="activeStep" />
       <ApiDetailInfo v-if="activeStep == 4" :detail-data="detailData[0]" />
     </div>
     <div v-if="activeCard == 4" class="api-wrapper-request__main">
-      <ApiInputFormBrandDetailInfo @get-detail-data="getDetailData" @set-active-step="activeStep" :detail-data="detailData[0]" />
+      <ApiInputFormBrandDetailInfo v-show="activeStep != 2" @get-detail-data="getBrandData" @set-active-step="activeStep" :detail-data="detailData[0]" />
+      <BrandInfo v-if="activeStep == 2" :detail-data="detailData[0]" />
     </div>
     <div class="api-wrapper-request__code">
       <ApiCardRequest header="Запрос" />

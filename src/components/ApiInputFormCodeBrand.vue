@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import debounce from 'debounce';
 
 const article = ref('');
 const brands = ref('');
@@ -48,12 +49,17 @@ const fetchProduct = async () => {
   }
 };
 
+const debouncedSearchBrands = debounce(fetchBrands, 500);
+const debouncedSearchProduct = debounce(fetchProduct, 500);
+
 const onChangeInputArticle = () => {
-  fetchBrands();
+  debouncedSearchBrands();
+  /* fetchBrands(); */
 };
 
 const clickShowButton = () => {
-  fetchProduct();
+  debouncedSearchProduct();
+  /* fetchProduct(); */
 };
 
 const handleItemClick = (brand) => {
@@ -70,6 +76,7 @@ const setLanguage = (event) => {
 
 const setArticle = (event) => {
   article.value = event.target.getAttribute('value');
+  selectedBrand.value ='';
   fetchBrands();
 }
 </script>
@@ -83,6 +90,19 @@ const setArticle = (event) => {
       </select>
     </div>
     <form @submit.prevent action="" class="form-input">
+      <div>
+        <input
+          id=""
+          v-model="article"
+          placeholder="Артикул"
+          type="text"
+          name=""
+          @input="onChangeInputArticle"
+        >
+        <div class="sample">
+          Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
+        </div>
+      </div>
       <div class="form-input__brand">
         <input
           :readonly="!brands.list?.length"
@@ -102,23 +122,10 @@ const setArticle = (event) => {
           </li>
         </ul>
       </div>
-      <div>
-        <input
-          id=""
-          v-model="article"
-          placeholder="Артикул"
-          type="text"
-          name=""
-          @input="onChangeInputArticle"
-        >
-        <div class="sample">
-          <span @click="setArticle" value="4014835723498">Пример: 4014835723498</span>
-        </div>
-      </div>
       <button type="button" :disabled="!selectedBrand" @click.prevent="clickShowButton">
         Показать деталь
       </button>
-      <div v-show="failRequest">{{ failGetData }}</div>
+      <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </form>
   </div>
 </template>
@@ -148,7 +155,7 @@ const setArticle = (event) => {
 
     &-list {
       border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 8px 16px;
 
       li:hover {
@@ -164,23 +171,18 @@ const setArticle = (event) => {
   }
 
   input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-
     &:disabled {
       background: rgba(0, 0, 0, 0.08);
       cursor: default;
 
       &:hover {
         outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(0, 0, 0, 0.08);
       }
 
       &:focus {
         outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(0, 0, 0, 0.08);
       }
     }
   }
@@ -191,7 +193,7 @@ const setArticle = (event) => {
     background-color: $green;
     color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     white-space: nowrap;
 
     &:disabled {

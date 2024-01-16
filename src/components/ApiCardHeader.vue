@@ -45,6 +45,15 @@ const backToCards = inject('backToCards');
   }
 }
 
+@include for-lg-min {
+  .header {
+
+    &__description {
+      max-width: 70%;
+    }
+  }
+}
+
 @include for-large-devices {
   .header {
     padding: 40px 0;

@@ -2,23 +2,11 @@
 .hljs {
   background: none !important;
   color: $white;
-
-  &-attr {
-    color: #92c1ff;
-  }
-
-  &-string {
-    color: #92c1ff;
-  }
-
-  &-literal {
-    color: #ffe195;
-  }
 }
 
 .sample {
-  color: $grey;
-  font-size: 12px;
+  color: $darkgrey;
+  font-size: 16px;
   font-weight: 400;
   line-height: 16px;
   cursor: pointer;
@@ -26,8 +14,211 @@
   margin-top: 8px;
 
   span {
+    border-bottom: 1px dashed #797989;
+
     &:hover {
-      text-decoration: underline;
+      color: #a1c5f5;
+      border-bottom: 1px dashed #a1c5f5;
     }
   }
+}
+
+.brand-list {
+  &__header {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 114%;
+    margin-bottom: 12px;
+  }
+}
+
+.alert {
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
+  position: absolute;
+  top: 40px;
+}
+
+
+@include for-lg-min {
+
+  .brand-list {
+    &__header {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 114%;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+
+.hljs {
+  color: #fff;
+  background: none;
+  width: max-content
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  color: #ff7b72
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  color: #d2a8ff
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: #92c1ff
+}
+
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  color: #a5d6ff
+}
+
+.hljs-built_in,
+.hljs-symbol {
+  color: #ffa657
+}
+
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  color: #8b949e
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  color: #7ee787
+}
+
+.hljs-subst {
+  color: #c9d1d9
+}
+
+.hljs-section {
+  color: #1f6feb;
+  font-weight: 700
+}
+
+.hljs-bullet {
+  color: #f2cc60
+}
+
+.hljs-emphasis {
+  color: #c9d1d9;
+  font-style: italic
+}
+
+.hljs-strong {
+  color: #c9d1d9;
+  font-weight: 700
+}
+
+.hljs-addition {
+  color: #aff5b4;
+  background-color: #033a16
+}
+
+.hljs-deletion {
+  color: #ffdcd7;
+  background-color: #67060c
+}
+
+.api-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  background: #f2f7ff;
+  border-radius: 8px;
+  border: 1px solid #f2f7ff;
+  padding: 20px;
+  transition: all ease .2s
+}
+
+.api-card:active {
+  background: #a1c5f5;
+  border: 1px solid #ccccd2
+}
+
+.api-card__title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 140%;
+  margin-bottom: 12px
+}
+
+.api-card__description {
+  color: #797989;
+  line-height: 160%;
+  margin-bottom: 20px
+}
+
+.api-card__more {
+  color: #1972e7
+}
+
+@media only screen and (min-width: 992px) {
+  .api-card {
+    width: calc(50% - 12px)
+  }
+
+  .api-card:hover {
+    background: #fff;
+    border: 1px solid #ccccd2
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .api-card {
+    min-height: 312px;
+    padding: 32px
+  }
+
+  .api-card__title {
+    font-size: 21px;
+    max-width: 57%
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .api-card {
+    transition: all ease .2s
+  }
+
+  .api-card__title {
+    color: #13131f
+  }
+}
+
+.api-cards {
+  margin-top: 65px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap
 }
