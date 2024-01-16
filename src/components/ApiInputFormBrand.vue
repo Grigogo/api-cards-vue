@@ -46,7 +46,6 @@ const fetchProduct = async () => {
   }
 };
 
-
 const changeInputArticle = () => {
   if(article) {
     activeStep.value = 2;
@@ -54,11 +53,10 @@ const changeInputArticle = () => {
   }
 }
 
-const clickShowButton = () => {
-  fetchBrands();
+const clickShowButton = async () => {
+  await fetchBrands();
   if (brands.value.list?.length > 0) {
-    incrementStep();
-    failRequest.value = false;
+    activeStep.value = 3;
   } else {
     failRequest.value = true;
   }
@@ -68,15 +66,15 @@ const setLanguage = (event) => {
   langValue.value = event.target.value;
 }
 
-const handleItemClick = (brand) => {
+const handleItemClick = async (brand) => {
   selectedBrand.value = brand;
-  fetchProduct();
+  await fetchProduct();
   incrementStep();
 };
 
 const setArticle = (event) => {
   article.value = event.target.getAttribute('value');
-  fetchBrands();
+  activeStep.value = 2;
 }
 
 </script>

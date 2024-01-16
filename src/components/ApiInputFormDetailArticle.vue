@@ -44,13 +44,13 @@ const fetchProduct = async () => {
 };
 
 const onChangeInputArticle = () => {
-  fetchBrands();
   if(article && brandInfo.value.list != 0) {
     activeStep.value = 2;
   }
 };
 
-const clickShowButton = () => {
+const clickShowButton = async () => {
+  await fetchBrands();
   if (brands.value.list != 0) {
     activeStep.value = 3;
   } else {
