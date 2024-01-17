@@ -40,7 +40,6 @@ const getBrandData = (data) => {
     </div>
     <div v-if="activeCard == 2" class="api-wrapper-request__main">
       <ApiInputFormBrand v-show="activeStep != 4" @get-detail-data="getBrandData" @set-active-step="activeStep" />
-      <BrandInfo v-if="activeStep == 4" :detail-data="detailData[0]" />
     </div>
     <div v-if="activeCard == 3" class="api-wrapper-request__main">
       <ApiInputFormDetailArticle v-show="activeStep != 4" @get-detail-data="getDetailData" @set-active-step="activeStep" />

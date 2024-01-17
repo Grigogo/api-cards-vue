@@ -7,6 +7,8 @@ const article = ref('');
 const brands = ref('');
 const selectedBrand = ref('');
 const langValue = ref('ru');
+const failGetBrandsText = 'Ни одного производителя по введенному артикулу не найдено. Перепроверьте артикул или введите другой';
+const failGetBrands = ref(false);
 const failGetData = 'Проверьте введенные данные';
 const failRequest = ref(false);
 const showBrandList = ref(false);
@@ -28,6 +30,7 @@ const fetchBrands = async () => {
     if (data?.list.length != 0) {
       brands.value = data;
       showBrandList.value = true;
+      failGetBrands.value = false;
     } else {
       showBrandList.value = false;
       selectedBrand.value ='';
@@ -52,9 +55,14 @@ const fetchProduct = async () => {
 const debouncedSearchBrands = debounce(fetchBrands, 500);
 const debouncedSearchProduct = debounce(fetchProduct, 500);
 
-const onChangeInputArticle = () => {
-  debouncedSearchBrands();
+const onChangeInputArticle = async () => {
+  try {
+    await debouncedSearchBrands();
+    failGetBrands.value = true;
+    selectedBrand.value ='';
+  } catch {
   /* fetchBrands(); */
+  }
 };
 
 const clickShowButton = () => {
@@ -67,6 +75,7 @@ const handleItemClick = (brand) => {
     selectedBrand.value ='';
   } else {
     selectedBrand.value = brand;
+    showBrandList.value = false;
   }
 };
 
@@ -105,7 +114,7 @@ const setArticle = (event) => {
       </div>
       <div class="form-input__brand">
         <input
-          :readonly="!brands.list?.length"
+          readonly
           v-model="selectedBrand"
           :disabled="!brands.list?.length"
           placeholder="Бренд"
@@ -126,6 +135,7 @@ const setArticle = (event) => {
         Показать деталь
       </button>
       <div class="alert" v-show="failRequest">{{ failGetData }}</div>
+      <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
     </form>
   </div>
 </template>

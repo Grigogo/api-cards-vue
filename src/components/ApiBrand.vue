@@ -21,14 +21,6 @@ const stepsData = {
       step: 2,
       text: 'Получение списка брендов',
     },
-    {
-      step: 3,
-      text: 'Выбор бренда и языка',
-    },
-    {
-      step: 4,
-      text: 'Получение информации о бренде',
-    },
   ],
 };
 /* const data = JSON.parse(document.getElementById('app').getAttribute('data-my-data'));

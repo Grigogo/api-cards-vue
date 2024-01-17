@@ -1,7 +1,7 @@
 
 .hljs {
   background: none !important;
-  color: $white;
+  color: $white !important;
 }
 
 .sample {
@@ -41,6 +41,7 @@
   border-color: #b6d4fe;
   position: absolute;
   top: 40px;
+  max-width: 360px;
 }
 
 
@@ -54,13 +55,18 @@
       margin-bottom: 24px;
     }
   }
+
+  .alert {
+    max-width: 460px;
+    top: 60px;
+  }
 }
 
 
 .hljs {
-  color: #fff;
-  background: none;
-  width: max-content
+  color: #fff !important;
+  background: none !important;
+  width: max-content !important;
 }
 
 .hljs-doctag,
@@ -89,13 +95,13 @@
 .hljs-selector-attr,
 .hljs-selector-class,
 .hljs-selector-id {
-  color: #92c1ff
+  color: #92c1ff !important
 }
 
 .hljs-regexp,
 .hljs-string,
 .hljs-meta .hljs-string {
-  color: #a5d6ff
+  color: #a5d6ff !important
 }
 
 .hljs-built_in,

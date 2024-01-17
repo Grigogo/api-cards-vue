@@ -5,12 +5,10 @@ import debounce from 'debounce';
 
 const article = ref('');
 const brands = ref('');
-const brandInfo = ref('');
-const selectedBrand = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
-const { activeStep, incrementStep } = inject('activeStep');
+const { activeStep} = inject('activeStep');
 
 const emit = defineEmits(['get-detail-data']);
 
@@ -34,29 +32,11 @@ const fetchBrands = async () => {
   }
 };
 
-const fetchProduct = async () => {
-  try {
-    const { data } = await axios.get(`https://api.parts-index.com/v1/brands/parse?q=${selectedBrand.value}&lang=${langValue.value}`, config);
-    brandInfo.value = data.list;
-    emit('get-detail-data', data.list);
-    failRequest.value = false;
-  } catch (error) {
-    failRequest.value = true;
-    console.error(error);
-  }
-};
-
-const changeInputArticle = () => {
-  if(article) {
-    activeStep.value = 2;
-  } else {
-  }
-}
-
 const clickShowButton = async () => {
   await fetchBrands();
   if (brands.value.list?.length > 0) {
-    activeStep.value = 3;
+    failRequest.value = false;
+    activeStep.value = 2;
   } else {
     failRequest.value = true;
   }
@@ -66,15 +46,8 @@ const setLanguage = (event) => {
   langValue.value = event.target.value;
 }
 
-const handleItemClick = async (brand) => {
-  selectedBrand.value = brand;
-  await fetchProduct();
-  incrementStep();
-};
-
 const setArticle = (event) => {
   article.value = event.target.getAttribute('value');
-  activeStep.value = 2;
 }
 
 </script>
@@ -88,7 +61,7 @@ const setArticle = (event) => {
       </select>
     </div>
 
-    <form @submit.prevent v-show="activeStep == 1 || activeStep == 2" action="" class="form-input">
+    <form @submit.prevent v-show="activeStep == 1" action="" class="form-input">
       <div>
         <input
           id=""
@@ -108,18 +81,14 @@ const setArticle = (event) => {
       <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </form>
 
-    <div v-show="activeStep == 3" class="brands">
-      <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Выберите бренд</div>
+    <div v-show="activeStep == 2" class="brands">
+      <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Список брендов</div>
       <ul v-show="brands.list?.length" class="brand-list__list" :class="{overflow: brands.list?.length > 6}">
         <li
           v-for="(item, id) in brands?.list"
           :key="id"
-          @click="handleItemClick(item.name)"
         >
           {{ item.name }}
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M8.99991 17L13.4999 12L8.99991 7L10 6L16 12L10 18L8.99991 17Z" fill="black" fill-opacity="0.24"/>
-          </svg>
         </li>
       </ul>
       <div class="alert" v-show="failRequest">{{ failGetData }}</div>
