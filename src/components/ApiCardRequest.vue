@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   header: String,
-  serverResponse: String,
+  request: String,
 });
 
 </script>
@@ -13,7 +13,7 @@ defineProps({
     </div>
     <div class="api-request__code">
       <span class="block"><span class="purple-code">curl</span> --request GET \</span>
-      <span class="block">--url https://api.parts-index.com/v1/parts-by-vin \</span>
+      <span class="block">--url https://api.parts-index.com{{ request }} \</span>
       <span class="block">
         --header <span class="blue-code">'Accept: application/json'</span> \
       </span>
@@ -30,7 +30,7 @@ defineProps({
   width: 100%;
   color: #ffffff;
   white-space: nowrap;
-  height: 20%;
+  height: 150px;
 
   &__header {
     font-family: var(--bs-font-monospace);

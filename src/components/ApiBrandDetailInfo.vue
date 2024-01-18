@@ -6,7 +6,7 @@ import ApiMainForm from './ApiMainForm.vue';
 import ApiCardHeader from './ApiCardHeader.vue';
 
 const headerData = {
-  title: 'Получение брендов по артикулу',
+  title: 'Детальная информации о конкретном бренде',
   description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
 }
 
@@ -41,9 +41,14 @@ function setStep(step) {
   activeStep.value = step.step;
 }
 
+function decrementStep() {
+  activeStep.value -= 1;
+}
+
 provide('activeStep', {
   activeStep,
   setStep,
+  decrementStep
 });
 
 </script>

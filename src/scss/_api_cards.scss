@@ -1,4 +1,9 @@
-
+.back {
+  color: $blue;
+  line-height: 160%;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
 .hljs {
   background: none !important;
   color: $white !important;
@@ -39,9 +44,8 @@
   color: #084298;
   background-color: #cfe2ff;
   border-color: #b6d4fe;
-  position: absolute;
-  top: 40px;
-  max-width: 360px;
+  max-width: 100%;
+  margin: auto;
 }
 
 

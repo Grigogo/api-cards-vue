@@ -1,11 +1,15 @@
 <script setup>
+import { inject } from 'vue';
 defineProps({
   detailData: Object,
 });
+
+const { decrementStep } = inject('activeStep');
 </script>
 
 <template>
     <div class="detail">
+      <div class="back" @click="decrementStep">← Назад</div>
       <div class="detail__header">
         Информация о бренде
       </div>
@@ -32,7 +36,7 @@ defineProps({
         </div>
         <div v-if="detailData.source" class="data-table__row">
           <div class="data-table__row-name">
-            <span> Название наше </span>
+            <span> Запрашиваемый бренд </span>
           </div>
           <div class="data-table__row-divider" />
           <div class="data-table__row-value">
@@ -98,7 +102,6 @@ defineProps({
 <style lang="scss">
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
-
 
 .detail {
   padding: 32px;

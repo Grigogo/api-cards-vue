@@ -1,11 +1,15 @@
 <script setup>
+import { inject } from 'vue';
 defineProps({
   detailData: Object,
 });
+
+const { decrementStep } = inject('activeStep');
 </script>
 
 <template>
   <div class="detail">
+  <div class="back" @click="decrementStep">← Назад</div>
     <div class="detail__image">
       <img :src="detailData.images[0]" alt="">
     </div>
@@ -57,6 +61,7 @@ defineProps({
     width: 200px;
     height: 200px;
     border: 1px solid #ECECEC;
+    border-radius: 4px;
 
     img {
       max-width: 100%;

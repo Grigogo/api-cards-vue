@@ -11,7 +11,7 @@ const backToCards = inject('backToCards');
 
 <template>
 <div class="header">
-  <div @click="backToCards" class="header__back">← Все возможности</div>
+  <div @click="backToCards" class="back">← Все возможности</div>
   <div class="header__title">{{ headerData.title }}</div>
   <div class="header__description">{{ headerData.description }}</div>
 </div>
@@ -23,13 +23,6 @@ const backToCards = inject('backToCards');
 
 .header {
   padding: 20px 0;
-
-  &__back {
-    color: $blue;
-    line-height: 160%;
-    margin-bottom: 16px;
-    cursor: pointer;
-  }
 
   &__title {
     font-size: 18px;

@@ -1,16 +1,15 @@
 <script setup>
 import { ref, inject } from 'vue';
 import axios from 'axios';
-import debounce from 'debounce';
 
 const article = ref('');
 const brands = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
-const { activeStep} = inject('activeStep');
+const { activeStep, decrementStep } = inject('activeStep');
 
-const emit = defineEmits(['get-detail-data']);
+const emit = defineEmits(['get-detail-data'], ['request']);
 
 
 // eslint-disable-next-line vue/max-len
@@ -26,6 +25,8 @@ const fetchBrands = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
     brands.value = data;
+    emit('get-detail-data', data);
+    emit('request', `/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`);
   } catch (error) {
     failRequest.value = true;
     console.error(error);
@@ -53,8 +54,8 @@ const setArticle = (event) => {
 </script>
 
 <template>
-  <div class="search-block" :class="{alignitemsstart: activeStep == 4}">
-    <div v-if="activeStep !== 4" class="search-block__lang">
+  <div class="search-block" :class="{alignitemsstart: activeStep == 2}">
+    <div v-if="activeStep !== 2" class="search-block__lang">
       <select @change="setLanguage" id="" name="">
         <option value="ru">RUS</option>
         <option value="en">ENG</option>
@@ -82,6 +83,8 @@ const setArticle = (event) => {
     </form>
 
     <div v-show="activeStep == 2" class="brands">
+  <div class="back" @click="decrementStep">← Назад</div>
+
       <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Список брендов</div>
       <ul v-show="brands.list?.length" class="brand-list__list" :class="{overflow: brands.list?.length > 6}">
         <li
@@ -105,8 +108,7 @@ const setArticle = (event) => {
 }
 
 .brands {
-  width: 392px;
-  margin-top: 48px;
+  width: 100%;
 }
 
 .alignitemsstart {
@@ -143,22 +145,10 @@ const setArticle = (event) => {
       justify-content: space-between;
       padding: 16px 12px;
       border-bottom: 1px solid $grey;
-      cursor: pointer;
       transition: all ease .3s;
 
       &:first-child {
         border-top: 1px solid $grey;
-
-        &:hover {
-          border-bottom: 1px solid $white;
-          border-top: 1px solid $white;
-        }
-      }
-
-      &:hover {
-        background-color: $whiteblue;
-        border-radius: 4px;
-        border-bottom: none;
       }
     }
   }
@@ -263,6 +253,12 @@ const setArticle = (event) => {
 
 @include for-lg-min {
 
+  .brand-list {
+
+    &__list {
+      max-height: 100%;
+    }
+  }
   .brand {
     width: 100%;
     margin: 24px 32px;

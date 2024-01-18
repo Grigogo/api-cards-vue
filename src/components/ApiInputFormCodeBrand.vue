@@ -13,7 +13,7 @@ const failGetData = 'Проверьте введенные данные';
 const failRequest = ref(false);
 const showBrandList = ref(false);
 
-const emit = defineEmits(['get-detail-data']);
+const emit = defineEmits(['get-detail-data'], ['request']);
 
 // eslint-disable-next-line vue/max-len
 const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmpJZCI6IjgzNjgifQ._ANRn1x1ID_HqRE9EsV-4onyQK3VeyzMZPjXHIXRT8k';
@@ -43,7 +43,8 @@ const fetchBrands = async () => {
 const fetchProduct = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/entities?code=${article.value}&brand=${selectedBrand.value}&lang=${langValue.value}`, config);
-    emit('get-detail-data', data.list);
+    emit('get-detail-data', data);
+    emit('request', `/v1/entities?code=${article.value}&brand=${selectedBrand.value}&lang=${langValue.value}`);
     failRequest.value = false;
   } catch (error) {
     selectedBrand.value ='';
@@ -106,7 +107,7 @@ const setArticle = (event) => {
           placeholder="Артикул"
           type="text"
           name=""
-          @input="onChangeInputArticle"
+          @change="onChangeInputArticle"
         >
         <div class="sample">
           Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>

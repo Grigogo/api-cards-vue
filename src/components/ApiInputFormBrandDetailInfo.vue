@@ -7,8 +7,8 @@ const brand = ref('');
 const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
-const { activeStep} = inject('activeStep');
-const emit = defineEmits(['get-detail-data']);
+const { activeStep, decrementStep } = inject('activeStep');
+const emit = defineEmits(['get-detail-data'], ['request']);
 
 // eslint-disable-next-line vue/max-len
 const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmpJZCI6IjgzNjgifQ._ANRn1x1ID_HqRE9EsV-4onyQK3VeyzMZPjXHIXRT8k';
@@ -23,7 +23,8 @@ const fetchBrandInfo = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/parse?q=${brand.value}&lang=${langValue.value}`, config);
     brandInfo.value = data.list;
-    emit('get-detail-data', data.list);
+    emit('get-detail-data', data);
+    emit('request', `/v1/brands/parse?q=${brand.value}&lang=${langValue.value}`);
   } catch (error) {
     console.error(error);
   }
@@ -69,7 +70,7 @@ const setArticle = (event) => {
           >
           <div class="sample">
             Пример:
-            <span @click="setArticle" value="Bremi">Bremi</span>
+            <span @click="setArticle" value="VAG">VAG</span>
             <span @click="setArticle" value="Mann Filter">&nbsp Mann Filter</span>
             </div>
         </div>

@@ -10,7 +10,7 @@ const langValue = ref('ru');
 const failGetData = 'Проверьте введенные данные';
 let failRequest = ref(false);
 const { activeStep } = inject('activeStep');
-const emit = defineEmits(['get-detail-data']);
+const emit = defineEmits(['get-detail-data'], ['request']);
 
 // eslint-disable-next-line vue/max-len
 const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmpJZCI6IjgzNjgifQ._ANRn1x1ID_HqRE9EsV-4onyQK3VeyzMZPjXHIXRT8k';
@@ -25,6 +25,8 @@ const fetchBrands = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
     brands.value = data;
+    emit('get-detail-data', data);
+    emit('request', `/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`);
     failRequest.value = false;
   } catch (error) {
     failRequest.value = true;
@@ -35,8 +37,8 @@ const fetchBrands = async () => {
 const fetchProduct = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/entities?code=${article.value}&brand=${selectedBrand.value}&lang=${langValue.value}`, config);
-    emit('get-detail-data', data.list);
-
+    emit('get-detail-data', data);
+    emit('request', `/v1/entities?code=${article.value}&brand=${selectedBrand.value}&lang=${langValue.value}`);
   } catch (error) {
     selectedBrand.value ='';
     console.error(error);
@@ -72,7 +74,6 @@ const handleItemClick = (brand) => {
 
 const setArticle = (event) => {
   article.value = event.target.getAttribute('value');
-  fetchBrands();
 }
 
 </script>

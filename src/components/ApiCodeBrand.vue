@@ -41,6 +41,10 @@ function incrementStep() {
   activeStep.value += 1;
 }
 
+function decrementStep() {
+  activeStep.value -= 1;
+}
+
 function setStep(step) {
   activeStep.value = step.step;
 }
@@ -48,6 +52,7 @@ function setStep(step) {
 provide('activeStep', {
   activeStep,
   incrementStep,
+  decrementStep,
   setStep,
 });
 
