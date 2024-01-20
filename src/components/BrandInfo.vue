@@ -102,7 +102,6 @@ const { decrementStep } = inject('activeStep');
 <style lang="scss">
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
-
 .detail {
   padding: 32px;
   display: flex;
@@ -128,6 +127,7 @@ const { decrementStep } = inject('activeStep');
     width: 200px;
     height: 200px;
     border: 1px solid #ECECEC;
+    border-radius: 4px;
 
     img {
       max-width: 100%;
@@ -136,7 +136,7 @@ const { decrementStep } = inject('activeStep');
   }
 
   &__header {
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 500;
   }
 
@@ -148,6 +148,7 @@ const { decrementStep } = inject('activeStep');
 
 .data-table {
   &__row {
+    flex-direction: column;
     display: flex;
     justify-content: space-between;
     font-weight: 400;
@@ -158,27 +159,56 @@ const { decrementStep } = inject('activeStep');
 
     &-name {
       display: flex;
-      color: #ccccd2;
+      flex-shrink: 0;
+      color: $grey;
       max-width: 240px;
       width: 100%;
+      line-height: 1.6;
     }
 
     &-divider {
-      border-bottom: 1px dashed #ccccd2;
+      border-bottom: 1px dashed $grey;
       margin-right: 16px;
       width: 100%;
       height: 20px;
+      display: none;
     }
 
     &-value {
-      min-width: -webkit-fit-content;
-      min-width: -moz-fit-content;
       min-width: fit-content;
+      line-height: 1.6;
     }
 
     &-synonyms {
       display: block;
-      text-align: end;
+    }
+  }
+}
+
+@include for-tablet {
+
+  .detail {
+    min-height: 728px;
+    &__header {
+      font-size: 32px;
+    }
+  }
+  .data-table {
+    &__row {
+      flex-direction: row;
+
+      &-name {
+        max-width: 240px;
+      }
+
+      &-divider {
+        display: block;
+      }
+
+      &-synonyms {
+        text-align: end;
+        max-width: 240px;
+      }
     }
   }
 }

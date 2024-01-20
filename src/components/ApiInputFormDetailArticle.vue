@@ -24,8 +24,13 @@ const config = {
 const fetchBrands = async () => {
   try {
     const { data } = await axios.get(`https://api.parts-index.com/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`, config);
-    brands.value = data;
-    emit('get-detail-data', data);
+    if (data.list.length) {
+      brands.value = data;
+      failRequest.value = true;
+      emit('get-detail-data', data);
+    } else {
+      failRequest.value = true;
+    }
     emit('request', `/v1/brands/by-part-code?code=${article.value}&lang=${langValue.value}`);
     failRequest.value = false;
   } catch (error) {
@@ -53,12 +58,10 @@ const onChangeInputArticle = () => {
 
 const clickShowButton = async () => {
   await fetchBrands();
-  if (brands.value.list != 0) {
+  if (brands.value.list) {
     activeStep.value = 3;
   } else {
-    console.log(failRequest.value);
     failRequest.value = true;
-    console.log(failRequest.value);
   }
 };
 
@@ -68,7 +71,6 @@ const setLanguage = (event) => {
 
 const handleItemClick = (brand) => {
   selectedBrand.value = brand;
-  console.log(selectedBrand.value);
   fetchProduct();
 };
 
@@ -96,6 +98,7 @@ const setArticle = (event) => {
           type="text"
           name=""
           @input="onChangeInputArticle"
+          @keyup.enter="clickShowButton"
         >
         <div class="sample">
           Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>

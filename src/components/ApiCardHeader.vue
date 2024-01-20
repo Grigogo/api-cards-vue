@@ -22,7 +22,7 @@ const backToCards = inject('backToCards');
 @import '../scss/media';
 
 .header {
-  padding: 20px 0;
+  padding: 0 0 20px;
 
   &__title {
     font-size: 18px;
@@ -49,7 +49,7 @@ const backToCards = inject('backToCards');
 
 @include for-large-devices {
   .header {
-    padding: 40px 0;
+    padding: 0 0 40px;
 
     &__title {
       font-size: 27px;

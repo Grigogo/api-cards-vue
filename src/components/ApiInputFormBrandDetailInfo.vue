@@ -67,11 +67,12 @@ const setArticle = (event) => {
             placeholder="Бренд"
             type="text"
             name=""
+            @keyup.enter="handleButtonClick"
           >
           <div class="sample">
             Пример:
             <span @click="setArticle" value="VAG">VAG</span>
-            <span @click="setArticle" value="Mann Filter">&nbsp Mann Filter</span>
+            <span @click="setArticle" value="Mann Filter">Mann Filter</span>
             </div>
         </div>
         <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">

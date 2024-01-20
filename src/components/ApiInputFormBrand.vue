@@ -11,7 +11,6 @@ const { activeStep, decrementStep } = inject('activeStep');
 
 const emit = defineEmits(['get-detail-data'], ['request']);
 
-
 // eslint-disable-next-line vue/max-len
 const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmpJZCI6IjgzNjgifQ._ANRn1x1ID_HqRE9EsV-4onyQK3VeyzMZPjXHIXRT8k';
 
@@ -71,12 +70,17 @@ const setArticle = (event) => {
           type="text"
           name=""
           @input="changeInputArticle"
+          @keyup.enter="clickShowButton"
         >
         <div class="sample">
           Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
         </div>
       </div>
-      <button type="button" :disabled="!article" @click.prevent="clickShowButton">
+      <button
+        type="button"
+        :disabled="!article"
+        @click.prevent="clickShowButton"
+      >
         Показать бренды
       </button>
       <div class="alert" v-show="failRequest">{{ failGetData }}</div>
@@ -143,12 +147,13 @@ const setArticle = (event) => {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 16px 12px;
-      border-bottom: 1px solid $grey;
+      padding: 8px 12px;
+      border: 1px solid $whiteblue;
+      border-radius: 6px;
       transition: all ease .3s;
 
       &:first-child {
-        border-top: 1px solid $grey;
+        border-top: 1px solid $whiteblue;
       }
     }
   }
@@ -252,11 +257,17 @@ const setArticle = (event) => {
 }
 
 @include for-lg-min {
-
   .brand-list {
 
+    &__header {
+      max-width: 80%;
+      margin: 0 auto 24px;
+    }
+
     &__list {
-      max-height: 100%;
+      max-height: 560px;
+      width: 80%;
+      margin: 0 auto;
     }
   }
   .brand {

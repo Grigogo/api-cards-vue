@@ -53,16 +53,15 @@ const fetchProduct = async () => {
   }
 };
 
-const debouncedSearchBrands = debounce(fetchBrands, 500);
 const debouncedSearchProduct = debounce(fetchProduct, 500);
 
 const onChangeInputArticle = async () => {
-  try {
-    await debouncedSearchBrands();
+  selectedBrand.value ='';
+  await fetchBrands();
+  console.log(brands.value.list);
+
+  if (!brands.value.list?.length) {
     failGetBrands.value = true;
-    selectedBrand.value ='';
-  } catch {
-  /* fetchBrands(); */
   }
 };
 
@@ -108,6 +107,7 @@ const setArticle = (event) => {
           type="text"
           name=""
           @change="onChangeInputArticle"
+          @keyup.enter="onChangeInputArticle"
         >
         <div class="sample">
           Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>

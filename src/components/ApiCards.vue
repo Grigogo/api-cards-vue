@@ -21,7 +21,6 @@ const setActiveCard = (event) => {
 
 <style lang="scss">
 .api-cards {
-  margin-top: 65px;
   display: flex;
   gap: 24px;
   flex-wrap: wrap;

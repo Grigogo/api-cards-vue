@@ -20,6 +20,7 @@
 
   span {
     border-bottom: 1px dashed #797989;
+    margin-right: 8px;
 
     &:hover {
       color: #a1c5f5;
@@ -38,14 +39,16 @@
 }
 
 .alert {
+  flex-shrink: 0;
   padding: 0.5rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
   color: #084298;
   background-color: #cfe2ff;
   border-color: #b6d4fe;
+  width: 100%;
   max-width: 100%;
-  margin: auto;
+  margin: 0 auto;
 }
 
 
@@ -61,8 +64,9 @@
   }
 
   .alert {
+    width: fit-content;
     max-width: 460px;
-    top: 60px;
+    margin-top: 12px;
   }
 }
 
@@ -227,11 +231,4 @@
   .api-card__title {
     color: #13131f
   }
-}
-
-.api-cards {
-  margin-top: 65px;
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap
 }
