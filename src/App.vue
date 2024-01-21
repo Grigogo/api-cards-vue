@@ -37,6 +37,7 @@ provide('activeCard', activeCard);
 
 <template>
   <div class="container">
+    <div @click="backToCards" id="back-to-cards"></div>
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
     <ApiCodeBrand v-if="activeCard == 1" />
     <ApiBrand v-if="activeCard == 2" />
