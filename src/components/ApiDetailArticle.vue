@@ -5,43 +5,30 @@ import ApiSteps from './ApiSteps.vue';
 import ApiMainForm from './ApiMainForm.vue';
 import ApiCardHeader from './ApiCardHeader.vue';
 
+const myData = window.apiCardsData;
+
+const myData1 = myData[2];
+
+console.log(myData1.ELEMENTS[0].STEPS);
+
 const headerData = {
-  title: 'Информация о детали по артикулу',
-  description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
+  title: myData1.NAME,
+  description: myData1.DESCRIPTION,
 }
 
+const steps = myData1.ELEMENTS[0].STEPS.map((obj, index) => {
+  return {
+    step: index+1,
+    text: obj,
+  }
+})
+
+console.log(steps);
+
 const stepsData = {
-  title: 'Сначала пользователь указывает артикул детали и получает список брендов',
-  steps: [
-    {
-      step: 1,
-      text: 'Ввод артикула и выбор языка',
-    },
-    {
-      step: 2,
-      text: 'Получение списка брендов',
-    },
-    {
-      step: 3,
-      text: 'Выбор бренда и языка',
-    },
-    {
-      step: 4,
-      text: 'Получение информации о бренде',
-    },
-  ],
+  title: myData1.ELEMENTS[0].DETAIL_TEXT,
+  steps: steps,
 };
-/* const data = JSON.parse(document.getElementById('app').getAttribute('data-my-data'));
-
-const dataSteps = data.ITEMS.map((item, index) => ({
-  step: index + 1,
-  text: item.NAME,
-}));
-
-const stepsData = {
-  title: data.SECTION.PATH.pop().DESCRIPTION,
-  steps: dataSteps,
-}; */
 
 const activeStep = ref(1);
 

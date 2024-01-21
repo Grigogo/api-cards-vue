@@ -9,28 +9,17 @@ import ApiBrandDetailInfo from './components/ApiBrandDetailInfo.vue';
 const showCards = ref('true');
 const activeCard = ref('');
 
-const cardList = [
-  {
-    id: 1,
-    title: 'Информация о детали по артикулу и бренду',
-    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
-  },
-  {
-    id: 2,
-    title: 'Получение брендов по артикулу',
-    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
-  },
-  {
-    id: 3,
-    title: 'Информация о детали по артикулу',
-    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
-  },
-  {
-    id: 4,
-    title: 'Детальная информации о конкретном бренде',
-    description: 'Как принято считать, элементы политического процесса, инициированные исключительно синтетически, своевременно верифицированы. Есть над чем.',
-  },
-]
+const myData = window.apiCardsData;
+
+// const cardList = window.apiCardsData;
+const cardList = myData.map((obj, index) => {
+  return {
+    id: index+1,
+    title: obj.NAME,
+    description: obj.DESCRIPTION,
+  }
+})
+console.log(cardList);
 
 const setActiveCard = (data) => {
   activeCard.value = data;
