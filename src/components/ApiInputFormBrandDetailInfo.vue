@@ -43,7 +43,7 @@ const handleButtonClick = async () => {
   }
 }
 
-const setArticle = (event) => {
+const setBrand = (event) => {
   brand.value = event.target.getAttribute('value');
 }
 
@@ -71,8 +71,8 @@ const setArticle = (event) => {
           >
           <div class="sample">
             Пример:
-            <span @click="setArticle" value="VAG">VAG</span>
-            <span @click="setArticle" value="Mann Filter">Mann Filter</span>
+            <span @click="setBrand" value="VAG">VAG</span>
+            <span @click="setBrand" value="Mann Filter">Mann Filter</span>
             </div>
         </div>
         <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">

@@ -89,7 +89,7 @@ const setArticle = (event) => {
     <div v-show="activeStep == 2" class="brands">
   <div class="back" @click="decrementStep">← Назад</div>
 
-      <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Список брендов</div>
+      <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Список брендов по артикулу {{ article }}</div>
       <ul v-show="brands.list?.length" class="brand-list__list" :class="{overflow: brands.list?.length > 6}">
         <li
           v-for="(item, id) in brands?.list"
