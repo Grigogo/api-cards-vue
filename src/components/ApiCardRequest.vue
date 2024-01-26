@@ -43,7 +43,6 @@ defineProps({
     font-family: var(--bs-font-monospace);
     font-size: 14px;
     overflow: auto;
-    scrollbar-width: thin;
     scrollbar-color: hsl(0 0% 50%);
 
     &::-webkit-scrollbar {

@@ -12,6 +12,7 @@ const failGetBrands = ref(false);
 const failGetData = 'Проверьте введенные данные';
 const failRequest = ref(false);
 const showBrandList = ref(false);
+const activeBrandList = ref(false);
 
 const emit = defineEmits(['get-detail-data'], ['request']);
 
@@ -56,9 +57,10 @@ const fetchProduct = async () => {
 const debouncedSearchProduct = debounce(fetchProduct, 500);
 
 const onChangeInputArticle = async () => {
-  selectedBrand.value ='';
+  selectedBrand.value = '';
+  brands.value = '';
   await fetchBrands();
-  console.log(brands.value.list);
+  console.log(brands.value/* .list?.length */)
 
   if (!brands.value.list?.length) {
     failGetBrands.value = true;
@@ -121,8 +123,9 @@ const setArticle = (event) => {
           placeholder="Бренд"
           type="text"
           name=""
+          @focus="activeBrandList = true"
         >
-        <ul v-show="showBrandList" class="form-input__brand-list" :class="{overflow: brands.list?.length > 6}">
+        <ul v-show="showBrandList && activeBrandList" class="form-input__brand-list" :class="{overflow: brands.list?.length > 6}">
           <li
             v-for="(item, id) in brands?.list"
             :key="id"
@@ -271,7 +274,6 @@ const setArticle = (event) => {
       width: 224px;
       max-height: 240px;
       overflow-y: scroll;
-      scrollbar-width: thin;
       scrollbar-color: hsl(0 0% 50%);
 
       &::-webkit-scrollbar {

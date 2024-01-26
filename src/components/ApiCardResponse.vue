@@ -30,11 +30,6 @@ defineProps({
   color: #ffffff;
   height: 570px;
 
-  pre {
-    max-height: 95%;
-    overflow-y: scroll;
-  }
-
   &__header {
     font-family: var(--bs-font-monospace);
     font-size: 16px;
@@ -48,9 +43,10 @@ defineProps({
   }
 
   pre {
+    max-height: 95%;
+    overflow-y: auto;
     padding: 0;
     margin: 0;
-    scrollbar-width: thin;
     scrollbar-color: hsl(0 0% 50%);
 
     &::-webkit-scrollbar {
@@ -63,7 +59,7 @@ defineProps({
     }
 
     &::-webkit-scrollbar-corner {
-      background: transparent;
+      background: #2B2A44;
     }
 
     &::-webkit-scrollbar-thumb {

@@ -110,7 +110,7 @@ const setArticle = (event) => {
       <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </form>
 
-    <div v-show="activeStep == 3" class="brands">
+    <div v-show="activeStep == 3" class="brands-info">
       <div class="brand-list__header" :class="{ mt36: brands.list?.length  > 6 }">Выберите бренд</div>
       <ul v-show="brands.list?.length" class="brand-list__list" :class="{overflow: brands.list?.length > 6}">
         <li
@@ -173,7 +173,7 @@ const setArticle = (event) => {
 .overflow {
   overflow-y: scroll;
 }
-.brands {
+.brands-info {
   width: 392px;
 }
 
@@ -189,7 +189,6 @@ const setArticle = (event) => {
   &__list {
     width: 100%;
     max-height: 360px;
-    scrollbar-width: thin;
     scrollbar-color: hsl(0 0% 50%);
 
     &::-webkit-scrollbar {
