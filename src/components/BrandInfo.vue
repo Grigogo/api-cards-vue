@@ -54,6 +54,15 @@ const { decrementStep } = inject('activeStep');
             </span>
           </div>
         </div>
+        <div v-if="detailData.group" class="data-table__row">
+          <div class="data-table__row-name">
+            <span>Состоит в группе</span>
+          </div>
+          <div class="data-table__row-divider" />
+          <div class="data-table__row-value">
+            {{ detailData.group?.name }}
+          </div>
+        </div>
 
       </div>
     </div>

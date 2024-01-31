@@ -107,18 +107,64 @@ const setArticle = (event) => {
 @import "/src/scss/_media.scss";
 @import "/src/scss/global.scss";
 
-.overflow {
-  overflow-y: scroll;
+
+.brand {
+  width: 100%;
+  margin: 24px 32px;
 }
 
 .brands-info {
   width: 100%;
+  user-select: none;
+}
+.brand-info {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 16px;
+  color: #000;
+  font-size: 16px;
+  line-height: 160%;
+  margin-bottom: 16px;
+
+  &__name {
+    width: 35%;
+  }
+
+  &__descr {
+    width: 65%;
+    div {
+      display: inline-block;
+      padding-right: 8px;
+    }
+
+    a {
+      color: $blue;
+      cursor: pointer;
+
+      &:hover {
+        color: $lightblue;
+      }
+    }
+  }
+}
+
+.overflow {
+  overflow-y: scroll;
+}
+
+.mt36 {
+  margin-top: 36px;
 }
 
 .alignitemsstart {
   align-items: start !important;
 }
 .brand-list {
+
+  &__header {
+    width: 100%;
+  }
 
   &__list {
     width: 100%;
@@ -139,6 +185,7 @@ const setArticle = (event) => {
       border-radius: 20px;
     }
 
+
     li {
       color: #000;
       font-size: 18px;
@@ -146,13 +193,11 @@ const setArticle = (event) => {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 8px 12px;
-      border: 1px solid $whiteblue;
-      border-radius: 6px;
-      transition: all ease .3s;
+      padding: 16px 12px;
+      border-bottom: 1px solid $grey;
 
       &:first-child {
-        border-top: 1px solid $whiteblue;
+        border-top: 1px solid $grey;
       }
     }
   }
@@ -166,7 +211,6 @@ const setArticle = (event) => {
   gap: 8px;
   font-size: 18px;
   width: 100%;
-  margin-top: 48px;
 
   &__brand {
     display: flex;
@@ -182,23 +226,6 @@ const setArticle = (event) => {
       li:hover {
         text-decoration: underline;
         cursor: pointer;
-      }
-    }
-  }
-
-  input {
-    &:disabled {
-      background: rgba(0, 0, 0, 0.08);
-      cursor: default;
-
-      &:hover {
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-      }
-
-      &:focus {
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.12);
       }
     }
   }
@@ -221,12 +248,12 @@ const setArticle = (event) => {
 }
 
 .search-block {
-  padding: 16px 12px;
+  padding: 60px 12px 12px;
   border-radius: 8px;
   border: 1px solid #DBDFE9;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   position: relative;
   margin-bottom: 8px;
@@ -256,22 +283,21 @@ const setArticle = (event) => {
 }
 
 @include for-lg-min {
+
+  .brands-info {
+    height: 100%;
+  }
+
   .brand-list {
 
     &__header {
-      max-width: 80%;
-      margin: 0 auto 24px;
+      width: 100%;
     }
 
     &__list {
-      max-height: 560px;
       width: 80%;
-      margin: 0 auto;
+      max-height: 80%;
     }
-  }
-  .brand {
-    width: 100%;
-    margin: 24px 32px;
   }
   .form-input {
     flex-direction: row;
@@ -296,14 +322,12 @@ const setArticle = (event) => {
 
   .search-block {
     padding: 24px;
+    max-height: 728px;
+    overflow: hidden;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1093px) {
-
-  .mt36 {
-    margin-top: 36px;
-  }
   .form-input {
 
     &__brand {
@@ -332,9 +356,6 @@ const setArticle = (event) => {
 }
 
 @media (min-width: 1200px) and (max-width: 1214px) {
-  .mt36 {
-    margin-top: 36px;
-  }
 .search-block {
   padding: 12px;
 }

@@ -113,6 +113,7 @@ const setArticle = (event) => {
         >
         <div class="sample">
           Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
+          <span @click="setArticle" value="0092S40040">0092S40040</span>
         </div>
       </div>
       <div class="form-input__brand">
@@ -153,10 +154,7 @@ const setArticle = (event) => {
   overflow-y: scroll;
 }
 .form-input {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
   gap: 8px;
   font-size: 18px;
   width: 100%;
@@ -182,6 +180,14 @@ const setArticle = (event) => {
   &__brand-list {
     max-height: 200px;
     overflow-y: scroll;
+  }
+
+  span {
+    display: inline-block;
+
+    &:first-child {
+      margin-left: 4px;
+    }
   }
 
   input {
@@ -255,7 +261,12 @@ const setArticle = (event) => {
 
 @include for-lg-min {
   .form-input {
-    flex-direction: row;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    button {
+      max-height: 48px;
+      padding: 10px 8px;
+    }
 
     &__brand {
       display: flex;
@@ -316,6 +327,7 @@ const setArticle = (event) => {
     }
 
     button {
+      max-height: 48px;
       padding: 10px 8px;
     }
   }
@@ -328,6 +340,10 @@ const setArticle = (event) => {
 @media (min-width: 1200px) and (max-width: 1214px) {
 .search-block {
   padding: 12px;
+}
+button {
+  max-height: 48px;
+  padding: 10px 8px;
 }
 }
 </style>

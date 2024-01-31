@@ -18,6 +18,24 @@ const { decrementStep } = inject('activeStep');
     </div>
 
     <div class="data-table__rows">
+      <div v-if="detailData.code" class="data-table__row">
+        <div class="data-table__row-name">
+          <span>Артикул</span>
+        </div>
+        <div class="data-table__row-divider" />
+        <div class="data-table__row-value">
+          {{ detailData.code }}
+        </div>
+      </div>
+      <div v-if="detailData.brand.name" class="data-table__row">
+        <div class="data-table__row-name">
+          <span>Бренд</span>
+        </div>
+        <div class="data-table__row-divider" />
+        <div class="data-table__row-value">
+          {{ detailData.brand.name }}
+        </div>
+      </div>
       <div
         v-for="{ id, title, values } in detailData.parameters[0]?.params"
         :key="id"
