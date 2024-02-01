@@ -60,7 +60,6 @@ const onChangeInputArticle = async () => {
   selectedBrand.value = '';
   brands.value = '';
   await fetchBrands();
-  console.log(brands.value/* .list?.length */)
 
   if (!brands.value.list?.length) {
     failGetBrands.value = true;
@@ -101,7 +100,7 @@ const setArticle = (event) => {
       </select>
     </div>
     <form @submit.prevent action="" class="form-input">
-      <div>
+      <div class="search-block__wrapper">
         <input
           id=""
           v-model="article"
@@ -111,7 +110,6 @@ const setArticle = (event) => {
           @change="onChangeInputArticle"
           @keyup.enter="onChangeInputArticle"
         >
-      </div>
       <div class="form-input__brand">
         <input
           readonly
@@ -135,6 +133,8 @@ const setArticle = (event) => {
       <button type="button" :disabled="!selectedBrand" @click.prevent="clickShowButton">
         Показать деталь
       </button>
+    </div>
+
       <div class="sample">
         Пример:
         <span @click="setArticle" value="4014835723498"> 4014835723498</span>
@@ -144,6 +144,7 @@ const setArticle = (event) => {
     <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -154,6 +155,7 @@ const setArticle = (event) => {
 .overflow {
   overflow-y: scroll;
 }
+
 .form-input {
   display: flex;
   flex-direction: column;
@@ -162,6 +164,7 @@ const setArticle = (event) => {
   gap: 8px;
   font-size: 18px;
   width: 100%;
+  margin-bottom: 12px;
 
   &__brand {
     display: flex;
@@ -240,6 +243,14 @@ const setArticle = (event) => {
   position: relative;
   margin-bottom: 8px;
 
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+  }
+
   &__lang {
     position: absolute;
     top: 24px;
@@ -266,8 +277,10 @@ const setArticle = (event) => {
 
 @include for-lg-min {
   .form-input {
-    flex-direction: row;
+    flex-direction: column;
     justify-content: start;
+    margin-bottom: 0;
+    max-width: 660px;
 
     &__brand {
       display: flex;
@@ -307,45 +320,37 @@ const setArticle = (event) => {
 
   .search-block {
     padding: 24px;
+
+    &__wrapper {
+      flex-direction: row;
+    }
   }
 }
 
 @media (min-width: 992px) and (max-width: 1093px) {
   .form-input {
+    max-width: 600px;
 
     &__brand {
-      width: 204px;
+      max-width: 33%;
       input {
-        width: 204px;
+        max-width: 100% !important;
       }
-
-      &-list {
-        width: 204px;
-      }
-    }
-
-    input {
-      width: 204px;
-    }
-
-    button {
-      max-height: 48px;
-      padding: 10px 8px;
     }
   }
 
   .search-block {
-    min-width: 630px;
-  }
-}
+    &__wrapper {
+      max-width: 100%;
 
-@media (min-width: 1200px) and (max-width: 1214px) {
-.search-block {
-  padding: 12px;
-}
-button {
-  max-height: 48px;
-  padding: 10px 8px;
-}
+      input {
+        max-width: 33%;
+      }
+
+      button {
+        max-width: 33%;
+      }
+    }
+  }
 }
 </style>

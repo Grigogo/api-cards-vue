@@ -90,7 +90,7 @@ const setArticle = (event) => {
     </div>
 
     <form @submit.prevent v-show="activeStep == 1 || activeStep == 2" action="" class="form-input">
-      <div>
+      <div class="search-block__wrapper">
         <input
           id=""
           v-model="article"
@@ -100,13 +100,17 @@ const setArticle = (event) => {
           @input="onChangeInputArticle"
           @keyup.enter="clickShowButton"
         >
-        <div class="sample">
-          Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
-        </div>
+
+        <button type="button" :disabled="!article" @click.prevent="clickShowButton">
+          Показать бренды
+        </button>
       </div>
-      <button type="button" :disabled="!article" @click.prevent="clickShowButton">
-        Показать бренды
-      </button>
+
+      <div class="sample">
+        Пример:
+        <span @click="setArticle" value="4014835723498"> 4014835723498</span>
+        <span @click="setArticle" value="0092S40040">0092S40040</span>
+      </div>
       <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     </form>
 
@@ -291,6 +295,14 @@ const setArticle = (event) => {
   position: relative;
   margin-bottom: 8px;
 
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+  }
+
   &__lang {
     position: absolute;
     top: 24px;
@@ -342,31 +354,27 @@ const setArticle = (event) => {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1093px) {
+@media (min-width: 992px) {
   .form-input {
-
-    &__brand {
-      width: 204px;
-      input {
-        width: 204px;
-      }
-
-      &-list {
-        width: 204px;
-      }
-    }
-
-    input {
-      width: 204px;
-    }
-
-    button {
-      padding: 10px 8px;
-    }
+    margin: 0 auto;
+    max-width: 498px;
+    justify-content: start;
   }
 
   .search-block {
     min-width: 630px;
+
+    &__wrapper {
+      flex-direction: row;
+
+      input {
+        width: 288px;
+      }
+
+      button {
+        max-width: 202px;
+      }
+    }
   }
 }
 

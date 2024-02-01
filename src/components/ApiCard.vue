@@ -37,6 +37,7 @@ defineProps({
   border: 1px solid $whiteblue;
   padding: 20px;
   transition: all ease .2s;
+  max-height: 312px;
 
   &:active {
     background: $lightblue;
@@ -54,6 +55,12 @@ defineProps({
     color: $darkgrey;
     line-height: 160%;
     margin-bottom: 20px;
+    max-height: 124px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__more {

@@ -9,8 +9,6 @@ const myData = window.apiCardsData;
 
 const myData1 = myData[0];
 
-console.log(myData1.ELEMENTS[0].STEPS);
-
 const headerData = {
   title: myData1.NAME,
   description: myData1.DESCRIPTION,
@@ -23,14 +21,17 @@ const steps = myData1.ELEMENTS[0].STEPS.map((obj, index) => {
   }
 })
 
-console.log(steps);
+const stepsText = myData1.ELEMENTS[0].STEPS_TEXT.map((obj, index) => {
+  return {
+    step: index+1,
+    text: obj,
+  }
+})
 
 const stepsData = {
-  title: myData1.ELEMENTS[0].DETAIL_TEXT,
   steps: steps,
+  stepsText: stepsText,
 };
-
-
 
 const activeStep = ref(1);
 

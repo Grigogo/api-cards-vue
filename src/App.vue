@@ -19,7 +19,6 @@ const cardList = myData.map((obj, index) => {
     description: obj.DESCRIPTION,
   }
 })
-console.log(cardList);
 
 const setActiveCard = (data) => {
   activeCard.value = data;
@@ -34,9 +33,8 @@ function backToCards() {
 provide('backToCards', backToCards);
 provide('activeCard', activeCard);
 </script>
-/* style="margin-top:-40px" */
 <template>
-  <div class="container">
+  <div style="margin-top:-40px">
     <div @click="backToCards" id="back-to-cards"></div>
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
     <ApiCodeBrand v-if="activeCard == 1" />

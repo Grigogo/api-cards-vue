@@ -16,7 +16,7 @@ defineProps({
       <div class="scenario__title">
         Сценарий {{ activeStep }}/{{ stepsData.steps[stepsData.steps.length - 1].step }}
       </div>
-      <div v-html="stepsData.title" class="scenario__description">
+      <div v-html="stepsData.stepsText[`${activeStep-1}`].text" class="scenario__description">
       </div>
       <div class="scenario__steps">
         <div v-for="{step, text} in stepsData.steps" :key="step" class="scenario__step-item" :class="{'scenario__step-item_target': activeStep == step, 'scenario__step-item_done': activeStep > step}">
@@ -76,7 +76,7 @@ defineProps({
     }
 
     &-item {
-      width: 192px;
+      width: 300px;
       position: relative;
 
       &-circle {
