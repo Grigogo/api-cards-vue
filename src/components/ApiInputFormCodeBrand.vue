@@ -111,10 +111,6 @@ const setArticle = (event) => {
           @change="onChangeInputArticle"
           @keyup.enter="onChangeInputArticle"
         >
-        <div class="sample">
-          Пример:<span @click="setArticle" value="4014835723498"> 4014835723498</span>
-          <span @click="setArticle" value="0092S40040">0092S40040</span>
-        </div>
       </div>
       <div class="form-input__brand">
         <input
@@ -126,7 +122,7 @@ const setArticle = (event) => {
           name=""
           @focus="activeBrandList = true"
         >
-        <ul v-show="showBrandList && activeBrandList" class="form-input__brand-list" :class="{overflow: brands.list?.length > 6}">
+        <ul v-show="showBrandList && activeBrandList && article" class="form-input__brand-list" :class="{overflow: brands.list?.length > 6}">
           <li
             v-for="(item, id) in brands?.list"
             :key="id"
@@ -139,9 +135,14 @@ const setArticle = (event) => {
       <button type="button" :disabled="!selectedBrand" @click.prevent="clickShowButton">
         Показать деталь
       </button>
-      <div class="alert" v-show="failRequest">{{ failGetData }}</div>
-      <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
+      <div class="sample">
+        Пример:
+        <span @click="setArticle" value="4014835723498"> 4014835723498</span>
+        <span @click="setArticle" value="0092S40040">0092S40040</span>
+      </div>
     </form>
+    <div class="alert" v-show="failRequest">{{ failGetData }}</div>
+    <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
   </div>
 </template>
 
@@ -154,7 +155,10 @@ const setArticle = (event) => {
   overflow-y: scroll;
 }
 .form-input {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
   font-size: 18px;
   width: 100%;
@@ -208,7 +212,7 @@ const setArticle = (event) => {
   }
 
   button {
-    height: 100%;
+    height: 48px;
     padding: 10px 24px;
     background-color: $green;
     color: #ffffff;
@@ -230,6 +234,7 @@ const setArticle = (event) => {
   border: 1px solid #DBDFE9;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -261,12 +266,8 @@ const setArticle = (event) => {
 
 @include for-lg-min {
   .form-input {
-    grid-template-columns: 1fr 1fr 1fr;
-
-    button {
-      max-height: 48px;
-      padding: 10px 8px;
-    }
+    flex-direction: row;
+    justify-content: start;
 
     &__brand {
       display: flex;
@@ -286,6 +287,7 @@ const setArticle = (event) => {
       max-height: 240px;
       overflow-y: scroll;
       scrollbar-color: hsl(0 0% 50%);
+      background-color: #ffffff;
 
       &::-webkit-scrollbar {
         width: 8px;
