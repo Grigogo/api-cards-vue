@@ -1,6 +1,5 @@
 <script setup>
 import { provide, ref } from 'vue';
-import 'bootstrap/dist/css/bootstrap.css';
 import ApiSteps from './ApiSteps.vue';
 import ApiMainForm from './ApiMainForm.vue';
 import ApiCardHeader from './ApiCardHeader.vue';

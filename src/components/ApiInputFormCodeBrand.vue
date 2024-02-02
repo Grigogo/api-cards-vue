@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import axios from 'axios';
 import debounce from 'debounce';
 
@@ -13,7 +13,6 @@ const failGetData = 'Проверьте введенные данные';
 const failRequest = ref(false);
 const showBrandList = ref(false);
 const activeBrandList = ref(false);
-
 const emit = defineEmits(['get-detail-data'], ['request']);
 
 // eslint-disable-next-line vue/max-len
@@ -89,6 +88,14 @@ const setArticle = (event) => {
   selectedBrand.value ='';
   fetchBrands();
 }
+
+watch(article, () => {
+  if (!article) {
+    failGetBrands.value = true;
+  } else {
+    failGetBrands.value = false;
+  }
+})
 </script>
 
 <template>
@@ -136,11 +143,12 @@ const setArticle = (event) => {
     </div>
 
       <div class="sample">
-        Пример:
+        Пример1:
         <span @click="setArticle" value="4014835723498"> 4014835723498</span>
         <span @click="setArticle" value="0092S40040">0092S40040</span>
       </div>
     </form>
+    <div>{{ article }}</div>
     <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
   </div>
@@ -320,9 +328,13 @@ const setArticle = (event) => {
 
   .search-block {
     padding: 24px;
+    align-items: start;
 
     &__wrapper {
       flex-direction: row;
+    }
+
+    .alert {
     }
   }
 }
