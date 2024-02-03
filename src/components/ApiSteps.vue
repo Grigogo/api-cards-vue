@@ -94,7 +94,6 @@ defineProps({
       }
 
       &-descr {
-        width: 140px;
         color: $grey;
         font-size: 16px;
       }

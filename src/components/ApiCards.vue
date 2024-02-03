@@ -14,7 +14,7 @@ const setActiveCard = (event) => {
 
 <template>
   <div class="api-cards">
-    <ApiCard v-for="{ id, title, description } in cardList" :id="id" :key="id" :title="title" :description="description" @click="setActiveCard" />
+    <ApiCard v-for="{ id, code, title, description } in cardList" :id="code" :key="id" :title="title" :description="description" @click="setActiveCard" />
   </div>
 
 </template>

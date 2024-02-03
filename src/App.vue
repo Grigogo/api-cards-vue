@@ -14,11 +14,14 @@ const myData = window.apiCardsData;
 // const cardList = window.apiCardsData;
 const cardList = myData.map((obj, index) => {
   return {
-    id: index+1,
+    id: index,
+    code: obj.CODE,
     title: obj.NAME,
     description: obj.DESCRIPTION,
   }
 })
+
+console.log(myData);
 
 const setActiveCard = (data) => {
   activeCard.value = data;
@@ -37,10 +40,10 @@ provide('activeCard', activeCard);
   <div style="margin-top:-40px">
     <div @click="backToCards" id="back-to-cards"></div>
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
-    <ApiCodeBrand v-if="activeCard == 1" />
-    <ApiBrand v-if="activeCard == 2" />
-    <ApiDetailArticle v-if="activeCard == 3" />
-    <ApiBrandDetailInfo v-if="activeCard == 4" />
+    <ApiCodeBrand v-if="activeCard == 'DETAIL_BY_ARTICLE_BRAND'" />
+    <ApiBrand v-if="activeCard == 'BREND_BY_ARTICLE'" />
+    <ApiDetailArticle v-if="activeCard == 'DETAIL_BY_ARTICLE'" />
+    <ApiBrandDetailInfo v-if="activeCard == 'BRAND_BY_NAME'" />
   </div>
 </template>
 

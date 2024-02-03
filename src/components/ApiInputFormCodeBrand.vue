@@ -67,7 +67,6 @@ const onChangeInputArticle = async () => {
 
 const clickShowButton = () => {
   debouncedSearchProduct();
-  /* fetchProduct(); */
 };
 
 const handleItemClick = (brand) => {
@@ -143,12 +142,11 @@ watch(article, () => {
     </div>
 
       <div class="sample">
-        Пример1:
+        Пример:
         <span @click="setArticle" value="4014835723498"> 4014835723498</span>
         <span @click="setArticle" value="0092S40040">0092S40040</span>
       </div>
     </form>
-    <div>{{ article }}</div>
     <div class="alert" v-show="failRequest">{{ failGetData }}</div>
     <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
   </div>
@@ -289,6 +287,7 @@ watch(article, () => {
     justify-content: start;
     margin-bottom: 0;
     max-width: 660px;
+    margin: 0 auto;
 
     &__brand {
       display: flex;

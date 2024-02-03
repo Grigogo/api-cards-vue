@@ -23,6 +23,7 @@ defineProps({
 
 <style lang="scss" scoped>
 .api-response {
+  user-select: none;
   background-color: #2B2A44;
   border-radius: 8px;
   padding: 16px;
