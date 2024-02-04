@@ -39,18 +39,42 @@ const getBrandData = (data) => {
 <template>
   <div class="api-wrapper-request">
     <div v-if="activeCard == 'DETAIL_BY_ARTICLE_BRAND'" class="api-wrapper-request__main">
-      <ApiInputFormCodeBrand v-show="activeStep == 1" @request="setRequest" @get-detail-data="getDetailData" @set-active-step="activeStep" />
+      <ApiInputFormCodeBrand
+        v-show="activeStep == 1"
+        @request="setRequest"
+        @get-detail-data="getDetailData"
+        @set-active-step="activeStep"
+      />
       <ApiDetailInfo v-if="activeStep == 2" :detail-data="detailData.list[0]" />
     </div>
     <div v-if="activeCard == 'BREND_BY_ARTICLE'" class="api-wrapper-request__main">
-      <ApiInputFormBrand v-show="activeStep != 4" @request="setRequest" @get-detail-data="getBrandData" @set-active-step="activeStep" />
+      <ApiInputFormBrand
+        v-show="activeStep != 4"
+        @request="setRequest"
+        @get-detail-data="getBrandData"
+        @set-active-step="activeStep"
+      />
     </div>
     <div v-if="activeCard == 'DETAIL_BY_ARTICLE'" class="api-wrapper-request__main">
-      <ApiInputFormDetailArticle v-show="activeStep != 4" @request="setRequest" @get-detail-data="getDetailData" @set-active-step="activeStep" />
-      <ApiDetailInfo v-if="activeStep == 4" :detail-data="detailData.list[0]" />
+      <ApiInputFormDetailArticle
+        v-show="activeStep != 4"
+        @request="setRequest"
+        @get-detail-data="getDetailData"
+        @set-active-step="activeStep"
+      />
+      <ApiDetailInfo
+        v-if="activeStep == 4"
+        :detail-data="detailData.list[0]"
+        />
     </div>
     <div v-if="activeCard == 'BRAND_BY_NAME'" class="api-wrapper-request__main">
-      <ApiInputFormBrandDetailInfo v-show="activeStep != 2" @request="setRequest" @get-detail-data="getBrandData" @set-active-step="activeStep" :detail-data="detailData[0]" />
+      <ApiInputFormBrandDetailInfo
+        v-show="activeStep != 2"
+        @request="setRequest"
+        @get-detail-data="getBrandData"
+        @set-active-step="activeStep"
+        :detail-data="detailData[0]"
+      />
       <BrandInfo v-if="activeStep == 2" :detail-data="detailData.list[0]" />
     </div>
     <div class="api-wrapper-request__code">

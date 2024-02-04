@@ -146,9 +146,13 @@ watch(article, () => {
         <span @click="setArticle" value="4014835723498"> 4014835723498</span>
         <span @click="setArticle" value="0092S40040">0092S40040</span>
       </div>
+      <div class="search-block__wrapper">
+        <div class="alert" v-show="failRequest">{{ failGetData }}</div>
+        <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
+      </div>
     </form>
-    <div class="alert" v-show="failRequest">{{ failGetData }}</div>
-    <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
+
+
   </div>
 
 </template>
@@ -254,7 +258,6 @@ watch(article, () => {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    justify-content: center;
   }
 
   &__lang {

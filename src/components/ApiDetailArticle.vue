@@ -4,24 +4,25 @@ import ApiSteps from './ApiSteps.vue';
 import ApiMainForm from './ApiMainForm.vue';
 import ApiCardHeader from './ApiCardHeader.vue';
 
-const myData = window.apiCardsData;
+const props = defineProps({
+  dataCard: Array,
+})
 
-const myData1 = myData[2];
-
+console.log(props.dataCard);
 
 const headerData = {
-  title: myData1.NAME,
-  description: myData1.DESCRIPTION,
+  title: props.dataCard.NAME,
+  description: props.dataCard.DESCRIPTION,
 }
 
-const steps = myData1.ELEMENTS[0].STEPS.map((obj, index) => {
+const steps = props.dataCard[0].ELEMENTS[0].STEPS.map((obj, index) => {
   return {
     step: index+1,
     text: obj,
   }
 })
 
-const stepsText = myData1.ELEMENTS[0].STEPS_TEXT.map((obj, index) => {
+const stepsText = props.dataCard[0].ELEMENTS[0].STEPS_TEXT.map((obj, index) => {
   return {
     step: index+1,
     text: obj,

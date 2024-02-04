@@ -8,6 +8,7 @@ import ApiBrandDetailInfo from './components/ApiBrandDetailInfo.vue';
 
 const showCards = ref('true');
 const activeCard = ref('');
+const filteredArray = ref('');
 
 const myData = window.apiCardsData;
 
@@ -21,17 +22,19 @@ const cardList = myData.map((obj, index) => {
   }
 })
 
-console.log(myData);
-
 const setActiveCard = (data) => {
   activeCard.value = data;
   showCards.value = false;
+  filteredArray.value = myData.filter(item => item.CODE === data);
+
 };
 
 function backToCards() {
   showCards.value = true;
   activeCard.value = '';
 }
+
+
 
 provide('backToCards', backToCards);
 provide('activeCard', activeCard);
@@ -40,14 +43,16 @@ provide('activeCard', activeCard);
   <div style="margin-top:-40px">
     <div @click="backToCards" id="back-to-cards"></div>
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
-    <ApiCodeBrand v-if="activeCard == 'DETAIL_BY_ARTICLE_BRAND'" />
-    <ApiBrand v-if="activeCard == 'BREND_BY_ARTICLE'" />
-    <ApiDetailArticle v-if="activeCard == 'DETAIL_BY_ARTICLE'" />
-    <ApiBrandDetailInfo v-if="activeCard == 'BRAND_BY_NAME'" />
+    <ApiCodeBrand v-if="activeCard == 'DETAIL_BY_ARTICLE_BRAND'" :dataCard="filteredArray" />
+    <ApiBrand v-if="activeCard == 'BREND_BY_ARTICLE'" :dataCard="filteredArray" />
+    <ApiDetailArticle v-if="activeCard == 'DETAIL_BY_ARTICLE'" :dataCard="filteredArray" />
+    <ApiBrandDetailInfo v-if="activeCard == 'BRAND_BY_NAME'" :dataCard="filteredArray" />
   </div>
 </template>
 
 <style lang="scss">
 @import "/src/scss/_media.scss";
+/* class="view container" */
 @import "/src/scss/global.scss";
+@import "/src/scss/buttons.scss";
 </style>

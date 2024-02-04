@@ -275,6 +275,7 @@ const setArticle = (event) => {
     border: none;
     border-radius: 4px;
     white-space: nowrap;
+    width: 100%;
 
     &:disabled {
       background: rgba(0, 0, 0, 0.08);
@@ -376,11 +377,5 @@ const setArticle = (event) => {
       }
     }
   }
-}
-
-@media (min-width: 1200px) and (max-width: 1214px) {
-.search-block {
-  padding: 12px;
-}
 }
 </style>

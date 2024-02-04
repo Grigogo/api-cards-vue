@@ -60,25 +60,30 @@ const setBrand = (event) => {
       </div>
 
       <form @submit.prevent action="" class="form-input">
-        <div class="width100">
-          <input
-            id=""
-            v-model="brand"
-            placeholder="Бренд"
-            type="text"
-            name=""
-            @keyup.enter="handleButtonClick"
-          >
-          <div class="sample">
-            Пример:
-            <span @click="setBrand" value="VAG">VAG</span>
-            <span @click="setBrand" value="Mann Filter">Mann Filter</span>
-            </div>
+        <div class="search-block__wrapper">
+          <div class="width100">
+            <input
+              id=""
+              v-model="brand"
+              placeholder="Бренд"
+              type="text"
+              name=""
+              @keyup.enter="handleButtonClick"
+            >
+          </div>
+          <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">
+            Показать бренд
+          </button>
         </div>
-        <button type="button" :disabled="!brand" @click.prevent="handleButtonClick">
-          Показать бренд
-        </button>
-        <div class="alert" v-show="failRequest">{{ failGetData }}</div>
+        <div class="sample">
+          Пример:
+          <span @click="setBrand" value="VAG">VAG</span>
+          <span @click="setBrand" value="Mann Filter">Mann Filter</span>
+        </div>
+
+        <div class="search-block__wrapper">
+          <div class="alert" v-show="failRequest">{{ failGetData }}</div>
+        </div>
       </form>
     </div>
 
@@ -280,6 +285,13 @@ const setBrand = (event) => {
   position: relative;
   margin-bottom: 8px;
 
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
   &__lang {
     position: absolute;
     top: 24px;
@@ -336,44 +348,27 @@ const setBrand = (event) => {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1093px) {
-
-  .mt36 {
-    margin-top: 36px;
-  }
+@media (min-width: 992px) {
   .form-input {
-
-    &__brand {
-      width: 204px;
-      input {
-        width: 204px;
-      }
-
-      &-list {
-        width: 204px;
-      }
-    }
-
-    input {
-      width: 204px;
-    }
-
-    button {
-      padding: 10px 8px;
-    }
+    margin: 0 auto;
+    max-width: 498px;
+    justify-content: start;
   }
 
   .search-block {
     min-width: 630px;
-  }
-}
 
-@media (min-width: 1200px) and (max-width: 1214px) {
-  .mt36 {
-    margin-top: 36px;
+    &__wrapper {
+      flex-direction: row;
+
+      input {
+        width: 288px;
+      }
+
+      button {
+        max-width: 202px;
+      }
+    }
   }
-.search-block {
-  padding: 12px;
-}
 }
 </style>
