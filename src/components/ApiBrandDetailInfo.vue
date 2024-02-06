@@ -8,11 +8,9 @@ const props = defineProps({
   dataCard: Array,
 })
 
-console.log(props.dataCard);
-
 const headerData = {
-  title: props.dataCard.NAME,
-  description: props.dataCard.DESCRIPTION,
+  title: props.dataCard[0].NAME,
+  description: props.dataCard[0].DESCRIPTION,
 }
 
 const steps = props.dataCard[0].ELEMENTS[0].STEPS.map((obj, index) => {

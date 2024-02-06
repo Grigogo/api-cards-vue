@@ -13,8 +13,7 @@ defineProps({
       <div class="api-card__title">
         {{ title }}
     </div>
-    <div class="api-card__description">
-      {{ description }}
+    <div v-html="description" class="api-card__description">
     </div>
     </div>
     <div class="api-card__more">
