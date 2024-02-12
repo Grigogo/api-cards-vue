@@ -13,6 +13,7 @@ const failGetData = 'Проверьте введенные данные';
 const failRequest = ref(false);
 const showBrandList = ref(false);
 const activeBrandList = ref(false);
+const emptyArticle = ref(true);
 const emit = defineEmits(['get-detail-data'], ['request']);
 
 // eslint-disable-next-line vue/max-len
@@ -65,6 +66,15 @@ const onChangeInputArticle = async () => {
   }
 };
 
+const onChangeArticle = () => {
+  console.log(article.value.length);
+  if (article.value.length === 0) {
+    emptyArticle.value = true;
+  } else {
+    emptyArticle.value = false;
+  }
+}
+
 const clickShowButton = () => {
   debouncedSearchProduct();
 };
@@ -88,13 +98,6 @@ const setArticle = (event) => {
   fetchBrands();
 }
 
-watch(article, () => {
-  if (!article) {
-    failGetBrands.value = true;
-  } else {
-    failGetBrands.value = false;
-  }
-})
 </script>
 
 <template>
@@ -113,6 +116,7 @@ watch(article, () => {
           placeholder="Артикул"
           type="text"
           name=""
+          @input="onChangeArticle"
           @change="onChangeInputArticle"
           @keyup.enter="onChangeInputArticle"
         >
@@ -148,7 +152,7 @@ watch(article, () => {
       </div>
       <div class="search-block__wrapper">
         <div class="alert" v-show="failRequest">{{ failGetData }}</div>
-        <div class="alert" v-show="failGetBrands">{{ failGetBrandsText }}</div>
+        <div class="alert" v-show="failGetBrands && !emptyArticle">{{ failGetBrandsText }}</div>
       </div>
     </form>
 

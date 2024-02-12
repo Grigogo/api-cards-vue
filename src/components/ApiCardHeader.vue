@@ -13,7 +13,7 @@ const backToCards = inject('backToCards');
 <div class="header">
   <div @click="backToCards" class="back">← Все возможности</div>
   <div class="header__title">{{ headerData.title }}</div>
-  <div class="header__description">{{ headerData.description }}</div>
+  <div v-html="headerData.description" class="header__description"></div>
 </div>
 </template>
 

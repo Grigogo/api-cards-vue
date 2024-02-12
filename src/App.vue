@@ -40,7 +40,7 @@ provide('backToCards', backToCards);
 provide('activeCard', activeCard);
 </script>
 <template>
-  <div style="margin-top:-40px" >
+  <div  class="view container" >
     <div @click="backToCards" id="back-to-cards"></div>
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
     <ApiCodeBrand v-if="activeCard == 'DETAIL_BY_ARTICLE_BRAND'" :dataCard="filteredArray" />
@@ -52,7 +52,7 @@ provide('activeCard', activeCard);
 
 <style lang="scss">
 @import "/src/scss/_media.scss";
-/* class="view container" */
+/* class="view container" style="margin-top:-40px" */
 @import "/src/scss/global.scss";
 @import "/src/scss/buttons.scss";
 </style>
