@@ -40,7 +40,7 @@ provide('backToCards', backToCards);
 provide('activeCard', activeCard);
 </script>
 <template>
-  <div  class="view container" >
+  <div style="margin-top:-40px" >
     <div @click="backToCards" id="back-to-cards"></div>
     <ApiCards @set-active-card="setActiveCard" v-if="showCards" :cardList="cardList"/>
     <ApiCodeBrand v-if="activeCard == 'DETAIL_BY_ARTICLE_BRAND'" :dataCard="filteredArray" />
